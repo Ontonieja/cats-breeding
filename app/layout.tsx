@@ -1,6 +1,13 @@
 import { ReactNode } from 'react';
 import './globals.css';
+import localFont from 'next/font/local';
 import Nav from '@/components/Nav';
+
+const madimiFont = localFont({
+  src: '../public/fonts/MadimiOne-Regular.ttf',
+  display: 'swap',
+  variable: '--font-madimi',
+});
 
 export const metadata = {
   title: 'Next.js',
@@ -9,7 +16,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html suppressHydrationWarning>
+    <html suppressHydrationWarning className={`${madimiFont.variable}`}>
       <body className='h-screen'>
         <div className='container m-auto pt-4'>
           <header>

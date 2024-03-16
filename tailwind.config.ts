@@ -26,6 +26,12 @@ const config: Config = {
       translate: {
         center: '-50%',
       },
+      fontFamily: {
+        madimi: ['var(--font-madimi)'],
+      },
+      lineHeight: {
+        big: '5.4rem',
+      },
       boxShadow: {
         separator: '0 .125rem .675rem rgba(0,0,0,.08)',
         card: '0 .125rem .35rem rgba(0,0,0,.15)',
