@@ -4,6 +4,7 @@ const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './constants/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
@@ -11,6 +12,9 @@ const config: Config = {
       colors: {
         'pale-blue': '#013D7B',
         'coral-red': '#EE6551',
+        'light-blue': '#E4F1FC',
+        'light-pink': '#F6E4EC',
+        'light-green': '#E1F1ED',
       },
       height: {},
       width: {
@@ -18,11 +22,14 @@ const config: Config = {
         half: '50%',
       },
       maxWidth: {
+        medium: '60%',
         big: '75%',
         content: '95%',
       },
       maxHeight: {},
-      spacing: {},
+      spacing: {
+        'lg-margin': '120px',
+      },
       translate: {
         center: '-50%',
       },
