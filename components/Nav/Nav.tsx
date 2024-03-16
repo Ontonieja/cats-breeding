@@ -10,7 +10,7 @@ const Nav = () => {
           Samo <br></br>Szczęście
         </span>
       </div>
-      <ul className='flex gap-4 text-xl gap-14 font-medium'>
+      <ul className='flex gap-16 text-xl font-medium'>
         <li>
           <Link href='/' className='text-coral-red'>
             Strona główna

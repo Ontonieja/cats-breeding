@@ -19,8 +19,8 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const styles = {
-    primary: 'bg-pale-blue text-white',
-    secondary: 'border-2 border-pale-blue text-pale-blue flex',
+    primary: 'bg-pale-blue text-white font-semibold',
+    secondary: 'border-2 border-pale-blue text-pale-blue font-semibold',
     back: 'bg-primary-dark text-primary-light-text',
     cancel: 'text-primary-dark-text hover:bg-gray-light',
   };
