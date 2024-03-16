@@ -4,7 +4,7 @@ import CallToAction from './CallToAction';
 
 const Hero = () => {
   return (
-    <section className='flex items-center justify-between'>
+    <section className='flex items-center justify-between mt-14'>
       <div className='flex flex-col w-2/5'>
         <h1 className='text-7xl font-madimi leading-big'>
           Discover the Joy of Pet Ownership
