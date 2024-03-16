@@ -1,16 +1,20 @@
 import Link from 'next/link';
-import { IoPaw } from 'react-icons/io5';
+import { PawLogo } from '../Icons/Icons';
 
 const Nav = () => {
   return (
-    <nav className='flex justify-between item-center p-2'>
+    <nav className='flex justify-between item-center py-2'>
       <div className='flex items-center font-madimi'>
-        <IoPaw className='size-8 mr-2' />
-        Samo szczęście
+        <PawLogo />
+        <span className='text-xl leading-none'>
+          Samo <br></br>Szczęście
+        </span>
       </div>
-      <ul className='flex gap-4'>
+      <ul className='flex gap-4 text-xl gap-14 font-medium'>
         <li>
-          <Link href='/'>Strona główna</Link>
+          <Link href='/' className='text-coral-red'>
+            Strona główna
+          </Link>
         </li>
         <li>
           <Link href='/kocury'>Kocury</Link>
