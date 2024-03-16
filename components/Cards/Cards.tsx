@@ -1,5 +1,4 @@
 import { ICard } from '@/types/Cards';
-import Image from 'next/image';
 import { FC } from 'react';
 import Card from './Card';
 
@@ -8,9 +7,13 @@ interface CardsProps {
 }
 
 const Cards: FC<CardsProps> = ({ cardElements }) => {
-  return cardElements.map((cardEl, index) => {
-    return <Card key={index} card={cardEl} />;
-  });
+  return (
+    <div className='flex sm:flex-row justify-evenly mt-16 flex-wrap flex-col'>
+      {cardElements.map((cardEl, index) => {
+        return <Card key={index} card={cardEl} />;
+      })}
+    </div>
+  );
 };
 
 export default Cards;

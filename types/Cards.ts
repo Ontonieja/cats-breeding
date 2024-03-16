@@ -1,5 +1,10 @@
+import { StaticImageData } from 'next/image';
+
 export interface ICard {
   title: string;
   description: string;
-  imgUrl: string;
+  img: StaticImageData;
+  alt?: string;
+  cardContainerClasses: string;
+  navContainerClasses: string;
 }
