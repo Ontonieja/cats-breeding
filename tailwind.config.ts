@@ -9,42 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'primary-dark': '#000035',
-        primary: '#03024e',
-        'primary-bg': '#F8F8FB',
-        'secondary-bg': '#fff',
-        'primary-light-text': '#fff',
-        'primary-dark-text': '#141414',
-        'gray-dark': '#686868',
-        'gray-light': '#f8f8fb',
+        'pale-blue': '#013D7B',
+        'coral-red': '#EE6551',
       },
-      height: {
-        popup: '75vh',
-        'popup-content': '80%',
-        'unsplash-photo': '20vh',
-      },
+      height: {},
       width: {
         'half-screen': '50vw',
         half: '50%',
-        'course-item-lg': '16.6%',
       },
       maxWidth: {
-        'course-list-lg': '16.6%',
-        popup: '65%',
         big: '75%',
-        small: '25%',
+        content: '95%',
       },
-      maxHeight: {
-        popup: '80%',
-        '100': '100%',
-        'popup-content': '25vh',
-      },
-      spacing: {
-        '16px': '16px',
-        'negative-16': '-16px',
-        'p-cover': '56.25%',
-        'photo-gap': '0 .25rem .25rem 0',
-      },
+      maxHeight: {},
+      spacing: {},
       translate: {
         center: '-50%',
       },
