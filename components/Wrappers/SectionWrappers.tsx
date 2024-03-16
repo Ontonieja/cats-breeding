@@ -4,7 +4,7 @@ interface SectionWrapperProps {
 }
 
 const SectionWrapper: FC<SectionWrapperProps> = ({ children }) => {
-  return <section className='mt-24'>{children}</section>;
+  return <section className='mt-lg-margin '>{children}</section>;
 };
 
 export default SectionWrapper;
