@@ -6,7 +6,7 @@ import {
 
 import GoogleProvider from "next-auth/providers/google";
 
-const { NEXTAUTH_SECRET } = process.env;
+const { NEXTAUTH_SECRET, WHITELISTED_EMAILS } = process.env;
 
 const emailWhitelist = ["smagokpnd@gmail.com", "ontonieja@gmail.com"];
 
@@ -26,6 +26,10 @@ export const authOptions: NextAuthOptions = {
         }
       }
       return token;
+    },
+    async session({ session, token, user }) {
+      session.user = user;
+      return session;
     },
   },
 };
