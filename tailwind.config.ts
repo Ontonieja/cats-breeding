@@ -8,6 +8,17 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontSize: {
+      "xs": ["12px", "16px"],
+      "sm": ["14px", "20px"],
+      "base": ["16px", "19.5px"],
+      "lg": ["18px", "21.94px"],
+      "xl": ["20px", "24.38px"],
+      "2xl": ["24px", "29.26px"],
+      "3xl": ["28px", "50px"],
+      "4xl": ["48px", "58px"],
+      "8xl": ["96px", "106px"],
+    },
     extend: {
       colors: {
         "pale-blue": "#013D7B",
@@ -15,9 +26,6 @@ const config: Config = {
         "light-blue": "#E4F1FC",
         "light-pink": "#F6E4EC",
         "light-green": "#E1F1ED",
-      },
-      boxShadow: {
-        "3xl": "0 10px 40px rgba(0, 0, 0, 0.1)",
       },
       height: {},
       width: {
@@ -46,6 +54,7 @@ const config: Config = {
         "separator": "0 .125rem .675rem rgba(0,0,0,.08)",
         "card": "0 .125rem .35rem rgba(0,0,0,.15)",
         "card-strong": "0 .5rem 1rem rgba(0,0,0,.25)",
+        "3xl": "0 10px 40px rgba(0, 0, 0, 0.1)",
       },
       transitionProperty: {
         card: "box-shadow, transform, -webkit-box-shadow, -webkit-transform",
