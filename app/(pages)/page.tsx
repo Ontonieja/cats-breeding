@@ -1,7 +1,8 @@
-import About from '@/components/About/About';
-import Cats from '@/components/Cats/Cats';
-import Hero from '@/components/Hero/Hero';
-import { FC } from 'react';
+import About from "@/components/About/About";
+import Cats from "@/components/Cats/Cats";
+import Hero from "@/components/Hero/Hero";
+import { FC } from "react";
+import Gallery from "@/components/Gallery/Gallery";
 
 const HomePage: FC = () => {
   return (
@@ -9,6 +10,7 @@ const HomePage: FC = () => {
       <Hero />
       <Cats />
       <About />
+      <Gallery />
     </>
   );
 };

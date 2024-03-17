@@ -1,6 +1,6 @@
-import { ICard } from '@/types/Cards';
-import { FC } from 'react';
-import Card from './Card';
+import { ICard } from "@/types/Cards";
+import { FC } from "react";
+import Card from "./Card";
 
 interface CardsProps {
   cardElements: ICard[];
@@ -8,7 +8,7 @@ interface CardsProps {
 
 const Cards: FC<CardsProps> = ({ cardElements }) => {
   return (
-    <div className='flex sm:flex-row justify-evenly mt-16 flex-wrap flex-col'>
+    <div className="flex flex-row justify-evenly mt-12 flex-wrap items-center">
       {cardElements.map((cardEl, index) => {
         return <Card key={index} card={cardEl} />;
       })}
