@@ -6,9 +6,9 @@ import {
 
 import GoogleProvider from 'next-auth/providers/google';
 
-const { NEXTAUTH_SECRET } = process.env;
+const { NEXTAUTH_SECRET, WHITELISTED_EMAILS } = process.env;
 
-const emailWhitelist = ['smagokpnd@gmail.com', 'ontonieja@gmailw.com'];
+if (!WHITELISTED_EMAILS) throw new Error('Missing configuration data');
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -21,11 +21,15 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        if (!emailWhitelist.includes(user.email || '')) {
+        if (!WHITELISTED_EMAILS.includes(user.email || '')) {
           throw new Error('Invalid email');
         }
       }
       return token;
+    },
+    async session({ session, token, user }) {
+      session.user = user;
+      return session;
     },
   },
 };
