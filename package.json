@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "setup:db": "./bin/setup-db.sh",
-    "setup": "chmod -R +x ./bin && ./bin/setup.sh"
+    "setup": "./bin/setup.sh"
   },
   "dependencies": {
     "@prisma/client": "latest",
