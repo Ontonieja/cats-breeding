@@ -18,12 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning className={`${madimiFont.variable}`}>
       <body className='h-screen'>
-        <div className='container m-auto pt-4'>
-          <header>
-            <Nav />
-          </header>
-          <main>{children}</main>
-        </div>
+        <div className='container m-auto pt-4'>{children}</div>
       </body>
     </html>
   );
