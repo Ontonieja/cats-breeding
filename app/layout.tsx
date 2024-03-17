@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import './globals.css';
 import localFont from 'next/font/local';
-import Nav from '@/components/Nav/Nav';
 
 const madimiFont = localFont({
   src: '../public/fonts/MadimiOne-Regular.ttf',
