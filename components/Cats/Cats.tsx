@@ -7,7 +7,7 @@ import catsYoga from "@/public/cats-yoga.png";
 const Cats = () => {
   return (
     <SectionWrapper>
-      <div className="flex justify-between items-center max-container">
+      <div className="flex justify-between items-center max-container relative">
         <div className="max-w-prose">
           <h2 className="text-4xl font-madimi">Nasze koty</h2>
           <p className="mt-2 text-lg">
@@ -20,7 +20,7 @@ const Cats = () => {
           src={catsYoga}
           height={180}
           alt="Kobieta z kotem uprawiajaca yoge"
-          className="max-sm:w-[150px]"
+          className="max-sm:w-[150px] max-sm:self-start"
         />
       </div>
 

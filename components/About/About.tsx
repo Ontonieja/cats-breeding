@@ -12,7 +12,7 @@ const About = () => {
           alt="Kobieta z kotem uprawiajaca yoge"
           className="max-sm:hidden"
         />
-        <div className="max-w-prose max-sm:text-center">
+        <div className="max-w-prose max-sm:text-center ">
           <h2 className="text-4xl font-madimi">O nas </h2>
           <p className="mt-4 text-lg">
             Jesteśmy siostrami z pasją do kotów brytyjskich, prowadzącymi

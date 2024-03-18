@@ -18,7 +18,7 @@ const Card: FC<CardProps> = ({ card }) => {
   const titleCapitalized = title.charAt(0).toUpperCase() + title.slice(1);
   return (
     <div
-      className={`relative flex flex-col items-center py-8 px-6 max-w-[240px] rounded-[48px] ${cardContainerClasses} mb-8`}
+      className={`relative flex flex-col items-center py-8 px-6 max-w-[240px] rounded-[48px] shadow-card ${cardContainerClasses} mb-8 cursor-pointer`}
     >
       <div className="size-[140px] flex items-center">
         <Image src={img} alt={alt || description} />
