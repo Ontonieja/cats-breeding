@@ -23,6 +23,10 @@ export async function getCat(id: number): Promise<Cat | null> {
   return prisma.cat.findFirst({ where: { id } });
 }
 
+export async function countCats() {
+  return await prisma.cat.count();
+}
+
 export async function updateCat(
   id: number,
   data: Prisma.CatUpdateInput

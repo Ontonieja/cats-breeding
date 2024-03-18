@@ -20,10 +20,9 @@ model Post {
 model Cat {
   id        Int      @id @default(autoincrement())
   slug      String?   @unique
-  about     String?
   name      String?
   description String
-  gender    Gender?
+  genderGroup    Gender?
   photos    CatPhoto[]
   documents CatDocument[]
 }

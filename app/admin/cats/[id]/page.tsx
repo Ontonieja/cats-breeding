@@ -3,52 +3,112 @@ import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { Cat } from '@prisma/client';
-import { createCat, getCats } from '@/db/src/services/catsData';
+import { createCat, getCats, countCats } from '@/db/src/services/catsData';
+import Button from '@/components/Base/Button/Button';
+import { catSex } from '@/constants/catSex';
 
 const Admin: FC = () => {
   const [cats, setCats] = useState<Cat[]>([]);
+  const [totalCats, setTotalCats] = useState(0);
   const [page, setPage] = useState(1);
   const params = useParams();
   const resultsPerPage = 10;
   const router = useRouter();
 
   useEffect(() => {
-    setPage(Number(params) || 1);
+    setPage(Number(params.id) || 1);
   }, [params]);
 
   useEffect(() => {
     const fetchCats = async () => {
+      const totalCats = await countCats();
+      let currentPage = Number(params.id) || 1;
+      const totalPages = Math.ceil(totalCats / resultsPerPage);
+
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+        router.push(`/admin/cats/${currentPage}`);
+      }
+
       const cats = await getCats({
+        skip: (currentPage - 1) * resultsPerPage,
         take: resultsPerPage,
-        skip: (page - 1) * resultsPerPage,
       });
+
       setCats(cats);
+      setTotalCats(totalCats);
+      setPage(currentPage);
     };
 
     fetchCats();
-  }, [page]);
+  }, [params, router]);
 
   const handleCreateCat = async () => {
     const { id } = await createCat({
       slug: '',
-      about: '',
       name: '',
-      gender: 'MALE',
+      genderGroup: 'MALE',
       description: '',
     });
     router.push(`/admin/cats/edit/${id}`);
   };
 
+  const totalPages = Math.ceil(totalCats / resultsPerPage);
+
   return (
-    <div>
-      <button type='button' onClick={handleCreateCat}>
+    <div className='container p-10 m-auto'>
+      <Button buttonStyle='primary' type='button' onClick={handleCreateCat}>
         Dodaj kota
-      </button>
-      {cats.map((cat) => (
-        <Link key={cat.id} href={`/admin/cats/edit/${cat.id}`}>
-          <h2>{cat.name}</h2>
-        </Link>
-      ))}
+      </Button>
+      <table className='w-full text-left border-collapse mt-4'>
+        <thead>
+          <tr>
+            <th className='py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light'>
+              Imię
+            </th>
+            <th className='py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light'>
+              Grupa
+            </th>
+            <th className='py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light'>
+              Opis
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {cats.map(({ name, genderGroup, id, description }, index) => (
+            <tr
+              key={id}
+              className={`cursor-pointer ${
+                index % 2 === 0 ? 'bg-gray-100' : ''
+              }`}
+              onClick={() => router.push(`/admin/cats/edit/${id}`)}
+            >
+              <td className='py-4 px-6 border-b border-grey-light'>{name}</td>
+              <td className='py-4 px-6 border-b border-grey-light'>
+                {catSex[genderGroup || 'MALE']}
+              </td>
+              <td className='py-4 px-6 border-b border-grey-light line-clamp-2'>
+                {description}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className='flex justify-between items-center pt-4'>
+        {page > 1 ? (
+          <Link href={`/admin/cats/${page - 1}`}>Poprzednia</Link>
+        ) : (
+          <div></div>
+        )}
+        <div>
+          strona {page} na {totalPages}
+        </div>
+        {page < totalPages ? (
+          <Link href={`/admin/cats/${page + 1}`}>Następna</Link>
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 };

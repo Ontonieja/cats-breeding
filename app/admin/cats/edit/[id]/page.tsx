@@ -1,15 +1,15 @@
 'use client';
 import { FC, useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { Cat, Gender } from '@prisma/client';
+import { Cat } from '@prisma/client';
+import { catSex, catSexOptions } from '@/constants/catSex';
 import { getCat, updateCat } from '@/db/src/services/catsData';
 import { SelectField } from '@/components/Base/Select/Select';
+import { creaetSlug } from '@/db/src/helpers/createSlug';
 
 interface CatFormValues {
   name: string;
-  gender: Gender;
-  about: string;
-  slug: string;
+  genderGroup: string;
   description: string;
 }
 
@@ -17,9 +17,7 @@ const EditCat: FC = () => {
   const [cat, setCat] = useState<Cat | null>(null);
   const [formValues, setFormValues] = useState<CatFormValues>({
     name: '',
-    gender: 'MALE',
-    about: '',
-    slug: '',
+    genderGroup: 'Kocury',
     description: '',
   });
 
@@ -30,13 +28,17 @@ const EditCat: FC = () => {
     const fetchCat = async () => {
       if (typeof id === 'string') {
         const fetchedCat = await getCat(Number(id));
-        setCat(fetchedCat);
+
+        const catInfo = {
+          ...fetchedCat,
+          genderGroup: catSex[fetchedCat?.genderGroup || 'Kocury'],
+        } as Cat;
+
+        setCat(catInfo);
         setFormValues({
-          name: fetchedCat?.name || '',
-          gender: fetchedCat?.gender || 'MALE',
-          about: fetchedCat?.about || '',
-          slug: fetchedCat?.slug || '',
-          description: fetchedCat?.description || '',
+          name: catInfo?.name || '',
+          genderGroup: catInfo?.genderGroup || 'Kocury',
+          description: catInfo?.description || '',
         });
       }
     };
@@ -45,7 +47,9 @@ const EditCat: FC = () => {
   }, [id]);
 
   const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     setFormValues({
       ...formValues,
@@ -56,7 +60,11 @@ const EditCat: FC = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (cat) {
-      await updateCat(cat.id, formValues);
+      await updateCat(cat.id, {
+        ...formValues,
+        genderGroup: catSexOptions[formValues.genderGroup] || 'MALE',
+        slug: creaetSlug(formValues.name),
+      });
       router.push('/admin/cats/1');
     }
   };
@@ -66,8 +74,9 @@ const EditCat: FC = () => {
       onSubmit={handleSubmit}
       className='max-w-xl mx-auto mt-10 bg-white p-10 rounded shadow-md'
     >
+      <h2 className='mb-6 text-[24px]'>Dodaj kota</h2>
       <div className='mb-5'>
-        <label className='block text-gray-700'>Name:</label>
+        <label className='block text-gray-700'>Imię:</label>
         <input
           type='text'
           name='name'
@@ -77,40 +86,19 @@ const EditCat: FC = () => {
         />
       </div>
       <div className='mb-5'>
-        <label className='block text-gray-700'>Gender:</label>
+        <label className='block text-gray-700'>Grupa:</label>
         <SelectField
-          name='gender'
-          value={formValues.gender}
-          options={['MALE', 'FEMALE', 'KID']}
+          name='genderGroup'
+          value={formValues.genderGroup}
+          options={['Kocury', 'Kotki', 'Kocięta']}
           onChange={handleChange}
           className='mt-1 p-2 w-full border-2 border-gray-300 rounded'
-          title='gender'
+          title='genderGroup'
         />
       </div>
       <div className='mb-5'>
-        <label className='block text-gray-700'>About:</label>
-        <input
-          type='text'
-          name='about'
-          value={formValues.about}
-          onChange={handleChange}
-          className='mt-1 p-2 w-full border-2 border-gray-300 rounded'
-        />
-      </div>
-      <div className='mb-5'>
-        <label className='block text-gray-700'>Slug:</label>
-        <input
-          type='text'
-          name='slug'
-          value={formValues.slug}
-          onChange={handleChange}
-          className='mt-1 p-2 w-full border-2 border-gray-300 rounded'
-        />
-      </div>
-      <div className='mb-5'>
-        <label className='block text-gray-700'>Description:</label>
-        <input
-          type='text'
+        <label className='block text-gray-700'>Opis:</label>
+        <textarea
           name='description'
           value={formValues.description}
           onChange={handleChange}
