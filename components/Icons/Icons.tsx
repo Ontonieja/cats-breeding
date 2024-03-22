@@ -66,7 +66,7 @@ export const InstagramIcon = () => {
       value={{
         color: "white",
         className:
-          "global-class-name bg-pale-blue p-2 color-blue  size-10 rounded-2xl ",
+          "global-class-name bg-pale-blue p-2 max-sm:p-1 color-blue  max-sm:size-8 size-10 rounded-xl ",
       }}
     >
       <Link
@@ -85,7 +85,7 @@ export const FacebookIcon = () => {
       value={{
         color: "white",
         className:
-          "global-class-name bg-pale-blue p-2 color-blue  size-10 rounded-2xl ",
+          "global-class-name bg-pale-blue p-2 max-sm:p-[5px] color-blue  size-10 max-sm:size-8 rounded-xl ",
       }}
     >
       <Link href="https://www.facebook.com/SamoSzczesciePL" target="_blank">

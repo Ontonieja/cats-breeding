@@ -7,9 +7,9 @@ import catsYoga from "@/public/cats-yoga.png";
 const Cats = () => {
   return (
     <SectionWrapper>
-      <div className="flex justify-between items-center max-container relative">
+      <div className="flex justify-between items-center max-container relative max-sm:flex-col">
         <div className="max-w-prose">
-          <h2 className="text-4xl font-madimi">Nasze koty</h2>
+          <h2 className="text-4xl font-madimi ">Nasze koty</h2>
           <p className="mt-2 text-lg">
             Zapraszamy Cię do poznania naszych czworonożnych przyjaciół i
             znalezienia swojego idealnego towarzysza życia. Odkryj prawdziwą
@@ -20,7 +20,7 @@ const Cats = () => {
           src={catsYoga}
           height={180}
           alt="Kobieta z kotem uprawiajaca yoge"
-          className="max-sm:w-[150px] max-sm:self-start"
+          className="max-sm:w-[150px] max-sm:self-start max-sm:order-[-1] max-sm:mb-2"
         />
       </div>
 
