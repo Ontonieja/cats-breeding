@@ -1,11 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { PawLogo } from "../Icons/Icons";
 import { HamburgerIcon } from "../Icons/Icons";
 
 const Nav = () => {
+  const pathname = usePathname();
   return (
     <header className="padding-x py-8">
-      <nav className="flex justify-between items-center max-container">
+      <nav className="sticky flex justify-between items-center max-container">
         <Link href="/" className="flex items-center font-madimi">
           <PawLogo />
 
@@ -18,21 +22,44 @@ const Nav = () => {
         </div>
         <ul className="flex gap-16 text-xl font-medium hidden lg:flex">
           <li>
-            <Link href="/" className="text-coral-red">
+            <Link
+              href="/"
+              className={`${pathname === "/" ? "text-coral-red" : ""} `}
+            >
               Strona główna
             </Link>
           </li>
           <li>
-            <Link href="/kocury">Kocury</Link>
+            <Link
+              href="/kocury"
+              className={`${pathname === "/kocury" ? "text-coral-red" : ""} `}
+            >
+              Kocury
+            </Link>
           </li>
           <li>
-            <Link href="/kotki">Kotki</Link>
+            <Link
+              href="/kotki"
+              className={`${pathname === "/kotki" ? "text-coral-red" : ""} `}
+            >
+              Kotki
+            </Link>
           </li>
           <li>
-            <Link href="/kocieta">Kocięta</Link>
+            <Link
+              href="/kocieta"
+              className={`${pathname === "/kocieta" ? "text-coral-red" : ""} `}
+            >
+              Kocięta
+            </Link>
           </li>
           <li>
-            <Link href="/kontakt">Kontakt</Link>
+            <Link
+              href="/kontakt"
+              className={`${pathname === "/kontakt" ? "text-coral-red" : ""} `}
+            >
+              Kontakt
+            </Link>
           </li>
         </ul>
       </nav>
