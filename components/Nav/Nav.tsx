@@ -20,7 +20,7 @@ const Nav = () => {
         <div className="lg:hidden block">
           <HamburgerIcon />
         </div>
-        <ul className="flex gap-16 text-xl font-medium hidden lg:flex">
+        <ul className="gap-16 text-xl font-medium hidden lg:flex">
           <li>
             <Link
               href="/"

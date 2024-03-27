@@ -26,7 +26,8 @@ export const PawLogo = () => {
     <IconContext.Provider
       value={{
         color: "coral-red",
-        className: "global-class-name text-coral-red text-4xl mr-2",
+        className:
+          "global-class-name text-coral-red text-4xl mr-2 max-sm:text-4xl",
       }}
     >
       <IoPaw />
