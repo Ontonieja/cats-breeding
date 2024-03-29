@@ -5,7 +5,7 @@ import { Cat } from '@prisma/client';
 import { catSex, catSexOptions } from '@/constants/catSex';
 import { getCat, updateCat } from '@/db/src/services/catsData';
 import { SelectField } from '@/components/Base/Select/Select';
-import { creaetSlug } from '@/db/src/helpers/createSlug';
+import { createSlug } from '@/db/src/helpers/createSlug';
 
 interface CatFormValues {
   name: string;
@@ -63,7 +63,7 @@ const EditCat: FC = () => {
       await updateCat(cat.id, {
         ...formValues,
         genderGroup: catSexOptions[formValues.genderGroup] || 'MALE',
-        slug: creaetSlug(formValues.name),
+        slug: createSlug(formValues.name),
       });
       router.push('/admin/cats/1');
     }
@@ -78,6 +78,7 @@ const EditCat: FC = () => {
       <div className='mb-5'>
         <label className='block text-gray-700'>Imię:</label>
         <input
+          title='name'
           type='text'
           name='name'
           value={formValues.name}
@@ -99,6 +100,7 @@ const EditCat: FC = () => {
       <div className='mb-5'>
         <label className='block text-gray-700'>Opis:</label>
         <textarea
+          title='description'
           name='description'
           value={formValues.description}
           onChange={handleChange}

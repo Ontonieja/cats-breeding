@@ -27,8 +27,10 @@ const Admin: FC = () => {
 
       if (currentPage > totalPages) {
         currentPage = totalPages;
-        router.push(`/admin/cats/${currentPage}`);
       }
+
+      // Ensure currentPage is at least 1
+      currentPage = Math.max(currentPage, 1);
 
       const cats = await getCats({
         skip: (currentPage - 1) * resultsPerPage,
@@ -45,7 +47,6 @@ const Admin: FC = () => {
 
   const handleCreateCat = async () => {
     const { id } = await createCat({
-      slug: '',
       name: '',
       genderGroup: 'MALE',
       description: '',
