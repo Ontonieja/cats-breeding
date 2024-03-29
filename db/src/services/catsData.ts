@@ -1,5 +1,6 @@
-'use server';
-import { PrismaClient, Cat, Prisma } from '@prisma/client';
+"use server";
+import { PrismaClient, Cat, Prisma } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 
@@ -9,6 +10,7 @@ interface PaginationOptions {
 }
 
 export async function createCat(data: Prisma.CatCreateInput): Promise<Cat> {
+  revalidatePath("/kocury");
   return prisma.cat.create({ data });
 }
 
@@ -31,6 +33,8 @@ export async function updateCat(
   id: number,
   data: Prisma.CatUpdateInput
 ): Promise<Cat> {
+  revalidatePath("/kocury");
+
   return prisma.cat.update({
     where: { id },
     data,
@@ -38,5 +42,6 @@ export async function updateCat(
 }
 
 export async function deleteCat(id: number): Promise<Cat> {
+  revalidatePath("/admin/admin/cats/1");
   return prisma.cat.delete({ where: { id } });
 }

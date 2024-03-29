@@ -26,7 +26,7 @@ model Cat {
   color      String?
   blood     String?
   father     String?
-  mother      String?
+  Mother      String?
   genderGroup    Gender?
   photos    CatPhoto[]
   documents CatDocument[]
