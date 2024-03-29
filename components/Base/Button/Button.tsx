@@ -2,7 +2,7 @@
 import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonStyle: "primary" | "secondary" | "back" | "cancel";
+  buttonStyle: "primary" | "secondary" | "back" | "cancel" | "delete";
   type?: "button" | "submit" | "reset";
   className?: string;
   icon?: boolean;
@@ -25,6 +25,8 @@ const Button = ({
       "border-2 border-pale-blue text-pale-blue font-semibold hover:bg-pale-blue transition ease-in-out duration-500 hover:text-white",
     back: "bg-primary-dark text-primary-light-text",
     cancel: "text-primary-dark-text hover:bg-gray-light",
+    delete:
+      "bg-[#FF6347] text-white font-semibold hover:bg-[#FF3E2E] transition ease-in-out duration-200 z-20",
   };
 
   const buttonClasses = {

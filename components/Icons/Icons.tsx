@@ -67,7 +67,7 @@ export const InstagramIcon = () => {
       value={{
         color: "white",
         className:
-          "global-class-name bg-pale-blue p-2 max-sm:p-1 color-blue  max-sm:size-8 size-10 rounded-xl ",
+          "global-class-name bg-pale-blue p-2 max-sm:p-1 color-blue  max-sm:size-8 size-10 rounded-xl hover:bg-[#0351A1] transition ease-in-out duration-300 ",
       }}
     >
       <Link
@@ -86,7 +86,7 @@ export const FacebookIcon = () => {
       value={{
         color: "white",
         className:
-          "global-class-name bg-pale-blue p-2 max-sm:p-[5px] color-blue  size-10 max-sm:size-8 rounded-xl ",
+          "global-class-name bg-pale-blue p-2 max-sm:p-[5px] color-blue  size-10 max-sm:size-8 rounded-xl hover:bg-[#0351A1] transition ease-in-out duration-300 ",
       }}
     >
       <Link href="https://www.facebook.com/SamoSzczesciePL" target="_blank">

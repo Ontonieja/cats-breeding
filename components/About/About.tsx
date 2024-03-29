@@ -5,7 +5,10 @@ import catAbout from "@/public/cat-about.png";
 const About = () => {
   return (
     <SectionWrapper>
-      <div className="flex justify-between items-center max-container max-sm:flex-col max-sm:items-start">
+      <div
+        id="about"
+        className="flex justify-between items-center max-container max-sm:flex-col max-sm:items-start"
+      >
         <Image
           src={catAbout}
           height={180}
