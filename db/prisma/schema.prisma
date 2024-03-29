@@ -22,6 +22,11 @@ model Cat {
   slug      String?   @unique
   name      String?
   description String
+  birthday   String?
+  color      String?
+  blood     String?
+  father     String?
+  mother      String?
   genderGroup    Gender?
   photos    CatPhoto[]
   documents CatDocument[]
