@@ -5,7 +5,6 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./node_modules/.prisma/client"
 }
 
 model Post {
@@ -19,32 +18,32 @@ model Post {
 }
 
 model Cat {
-  id        Int      @id @default(autoincrement())
-  slug      String?   @unique
-  name      String?
+  id          Int           @id @default(autoincrement())
+  slug        String?       @unique
+  name        String?
   description String
-  birthday   String?
-  color      String?
-  blood     String?
-  father     String?
+  birthday    String?
+  color       String?
+  blood       String?
+  father      String?
   Mother      String?
-  genderGroup    Gender?
-  photos    CatPhoto[]
-  documents CatDocument[]
+  genderGroup Gender?
+  photos      CatPhoto[]
+  documents   CatDocument[]
 }
 
-model CatPhoto{
-  id        Int      @id @default(autoincrement())
-  catId     Int
-  Cat       Cat    @relation(fields: [catId], references: [id])
-  Photo     String
+model CatPhoto {
+  id    Int    @id @default(autoincrement())
+  catId Int
+  Cat   Cat    @relation(fields: [catId], references: [id])
+  Photo String
 }
 
-model CatDocument{
-  id        Int      @id @default(autoincrement())
-  catId     Int
-  Cat       Cat    @relation(fields: [catId], references: [id])
-  document  String
+model CatDocument {
+  id       Int    @id @default(autoincrement())
+  catId    Int
+  Cat      Cat    @relation(fields: [catId], references: [id])
+  document String
 }
 
 enum Gender {

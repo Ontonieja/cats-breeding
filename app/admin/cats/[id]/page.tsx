@@ -1,16 +1,16 @@
-"use client";
-import { FC, useEffect, useState } from "react";
-import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
-import { Cat } from "@prisma/client";
+'use client';
+import { FC, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
+import { Cat } from '@prisma/client';
 import {
   createCat,
   getCats,
   countCats,
   deleteCat,
-} from "@/db/src/services/catsData";
-import Button from "@/components/Base/Button/Button";
-import { catSex } from "@/constants/catSex";
+} from '@/db/src/services/catsData';
+import Button from '@/components/Base/Button/Button';
+import { catSex } from '@/constants/catSex';
 
 const Admin: FC = () => {
   const [cats, setCats] = useState<Cat[]>([]);
@@ -52,9 +52,9 @@ const Admin: FC = () => {
 
   const handleCreateCat = async () => {
     const { id } = await createCat({
-      name: "",
-      genderGroup: "MALE",
-      description: "",
+      name: '',
+      genderGroup: 'MALE',
+      description: '',
     });
     router.push(`/admin/cats/edit/${id}`);
   };
@@ -62,20 +62,20 @@ const Admin: FC = () => {
   const totalPages = Math.ceil(totalCats / resultsPerPage);
 
   return (
-    <div className="container p-10 m-auto">
-      <Button buttonStyle="primary" type="button" onClick={handleCreateCat}>
+    <div className='container p-10 m-auto'>
+      <Button buttonStyle='primary' type='button' onClick={handleCreateCat}>
         Dodaj kota
       </Button>
-      <table className="w-full text-left border-collapse mt-4">
+      <table className='w-full text-left border-collapse mt-4'>
         <thead>
           <tr>
-            <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            <th className='py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light'>
               Imię
             </th>
-            <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            <th className='py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light'>
               Grupa
             </th>
-            <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            <th className='py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light'>
               Opis
             </th>
           </tr>
@@ -85,25 +85,25 @@ const Admin: FC = () => {
             ({ name, genderGroup, id, description, birthday }, index) => (
               <tr
                 key={id}
-                className={` ${index % 2 === 0 ? "bg-gray-100" : ""}`}
+                className={` ${index % 2 === 0 ? 'bg-gray-100' : ''}`}
               >
-                <td className="py-4 px-6 border-b border-grey-light">{name}</td>
-                <td className="py-4 px-6 border-b border-grey-light">
-                  {catSex[genderGroup || "MALE"]}
+                <td className='py-4 px-6 border-b border-grey-light'>{name}</td>
+                <td className='py-4 px-6 border-b border-grey-light'>
+                  {catSex[genderGroup || 'MALE']}
                 </td>
-                <td className="py-4 px-6 border-b border-grey-light line-clamp-2 flex items-center justify-between">
+                <td className='py-4 px-6 border-b border-grey-light line-clamp-2 flex items-center justify-between'>
                   {description}
-                  <div className="flex gap-4">
+                  <div className='flex gap-4'>
                     <Button
-                      buttonStyle="primary"
-                      type="button"
+                      buttonStyle='primary'
+                      type='button'
                       onClick={() => router.push(`/admin/cats/edit/${id}`)}
                     >
                       Edytuj
                     </Button>
                     <Button
-                      buttonStyle="delete"
-                      type="button"
+                      buttonStyle='delete'
+                      type='button'
                       onClick={() => deleteCat(id)}
                     >
                       Usuń
@@ -115,7 +115,7 @@ const Admin: FC = () => {
           )}
         </tbody>
       </table>
-      <div className="flex justify-between items-center pt-4">
+      <div className='flex justify-between items-center pt-4'>
         {page > 1 ? (
           <Link href={`/admin/cats/${page - 1}`}>Poprzednia</Link>
         ) : (
