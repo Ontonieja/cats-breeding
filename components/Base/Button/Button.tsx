@@ -2,7 +2,13 @@
 import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonStyle: "primary" | "secondary" | "back" | "cancel" | "delete";
+  buttonStyle:
+    | "primary"
+    | "secondary"
+    | "back"
+    | "cancel"
+    | "delete"
+    | "whiteBlue";
   type?: "button" | "submit" | "reset";
   className?: string;
   icon?: boolean;
@@ -27,6 +33,8 @@ const Button = ({
     cancel: "text-primary-dark-text hover:bg-gray-light",
     delete:
       "bg-[#FF6347] text-white font-semibold hover:bg-[#FF3E2E] transition ease-in-out duration-200 z-20",
+    whiteBlue:
+      "bg-white py-1 border border-[#013D7B] text-[#5580A6] hover:text-[#5F93C1] hover:bg-[#FBFAFA] transition ease-in-out duration-400",
   };
 
   const buttonClasses = {
