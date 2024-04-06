@@ -26,9 +26,11 @@ const authMiddleware = withAuth(function middleware(req) {}, {
 export function middleware(request: NextRequest) {
   const urlPath = request.nextUrl.pathname;
 
+  if (['/admin'].includes(urlPath)) {
+    return (authMiddleware as any)(request);
+  }
+
   if (['/admin', '/admin/cats'].includes(urlPath)) {
     return NextResponse.redirect(new URL('/admin/cats/1', request.url));
   }
-
-  return (authMiddleware as any)(request);
 }
