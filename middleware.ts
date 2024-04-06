@@ -16,7 +16,6 @@ const authMiddleware = withAuth(function middleware(req) {}, {
       ) {
         return false;
       }
-      console.log(!WHITELISTED_EMAILS?.includes(token?.email));
 
       return true;
     },
