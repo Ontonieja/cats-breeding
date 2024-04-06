@@ -26,7 +26,7 @@ const authMiddleware = withAuth(function middleware(req) {}, {
 export function middleware(request: NextRequest) {
   const urlPath = request.nextUrl.pathname;
 
-  if (['/admin'].includes(urlPath)) {
+  if (urlPath.startsWith('/admin')) {
     return (authMiddleware as any)(request);
   }
 
