@@ -85,13 +85,17 @@ const Admin: FC = () => {
             ({ name, genderGroup, id, description, birthday }, index) => (
               <tr
                 key={id}
-                className={`border-b border-grey-light ${
+                className={`border-b border-grey-light${
                   index % 2 === 0 ? 'bg-gray-100' : ''
                 }`}
               >
                 <td className="py-4 px-6">{name}</td>
                 <td className="py-4 px-6">{catSex[genderGroup || 'MALE']}</td>
-                <td className="py-4 px-6 line-clamp-2 n">{description}</td>
+                <td className="py-4 px-6 flex items-center">
+                  <div className="h-12 overflow-hidden line-clamp-2">
+                    {description}
+                  </div>
+                </td>
                 <td className="py-4 px-6 text-right">
                   <div className="flex gap-4">
                     <Button
