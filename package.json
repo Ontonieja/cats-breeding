@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "setup:db": "./bin/setup-db.sh",
-    "setup": "./bin/setup.sh"
+    "setup": "./bin/setup.sh",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "latest",
