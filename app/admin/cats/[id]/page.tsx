@@ -62,20 +62,20 @@ const Admin: FC = () => {
   const totalPages = Math.ceil(totalCats / resultsPerPage);
 
   return (
-    <div className='container p-10 m-auto'>
-      <Button buttonStyle='primary' type='button' onClick={handleCreateCat}>
+    <div className="container p-10 m-auto">
+      <Button buttonStyle="primary" type="button" onClick={handleCreateCat}>
         Dodaj kota
       </Button>
-      <table className='w-full text-left border-collapse mt-4'>
+      <table className="w-full text-left border-collapse mt-4 leading-normal table-fixed">
         <thead>
-          <tr>
-            <th className='py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light'>
+          <tr className="border-b border-grey-light">
+            <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark">
               Imię
             </th>
-            <th className='py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light'>
+            <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark">
               Grupa
             </th>
-            <th className='py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light'>
+            <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark">
               Opis
             </th>
           </tr>
@@ -85,25 +85,25 @@ const Admin: FC = () => {
             ({ name, genderGroup, id, description, birthday }, index) => (
               <tr
                 key={id}
-                className={` ${index % 2 === 0 ? 'bg-gray-100' : ''}`}
+                className={`border-b border-grey-light ${
+                  index % 2 === 0 ? 'bg-gray-100' : ''
+                }`}
               >
-                <td className='py-4 px-6 border-b border-grey-light'>{name}</td>
-                <td className='py-4 px-6 border-b border-grey-light'>
-                  {catSex[genderGroup || 'MALE']}
-                </td>
-                <td className='py-4 px-6 border-b border-grey-light line-clamp-2 flex items-center justify-between'>
-                  {description}
-                  <div className='flex gap-4'>
+                <td className="py-4 px-6">{name}</td>
+                <td className="py-4 px-6">{catSex[genderGroup || 'MALE']}</td>
+                <td className="py-4 px-6 line-clamp-2 n">{description}</td>
+                <td className="py-4 px-6 text-right">
+                  <div className="flex gap-4">
                     <Button
-                      buttonStyle='primary'
-                      type='button'
+                      buttonStyle="primary"
+                      type="button"
                       onClick={() => router.push(`/admin/cats/edit/${id}`)}
                     >
                       Edytuj
                     </Button>
                     <Button
-                      buttonStyle='delete'
-                      type='button'
+                      buttonStyle="delete"
+                      type="button"
                       onClick={() => deleteCat(id)}
                     >
                       Usuń
@@ -111,11 +111,11 @@ const Admin: FC = () => {
                   </div>
                 </td>
               </tr>
-            )
+            ),
           )}
         </tbody>
       </table>
-      <div className='flex justify-between items-center pt-4'>
+      <div className="flex justify-between items-center pt-4">
         {page > 1 ? (
           <Link href={`/admin/cats/${page - 1}`}>Poprzednia</Link>
         ) : (
