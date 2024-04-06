@@ -3,17 +3,21 @@ import { NextResponse, NextRequest } from 'next/server';
 
 const { WHITELISTED_EMAILS } = process.env;
 
-export default withAuth(function middleware(req) {}, {
+const authMiddleware = withAuth(function middleware(req) {}, {
   callbacks: {
-    authorized: ({ req, token }) => {
+    authorized: ({ req, token }: { req: NextRequest; token: any }) => {
       if (!token?.email) return false;
 
       if (
-        (req.nextUrl.pathname.startsWith('/admin') && token === null) ||
+        req.nextUrl.pathname.startsWith('/admin') &&
+        !WHITELISTED_EMAILS &&
+        token === null &&
         !WHITELISTED_EMAILS?.includes(token?.email)
       ) {
         return false;
       }
+      console.log(!WHITELISTED_EMAILS?.includes(token?.email));
+
       return true;
     },
   },
@@ -26,5 +30,5 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/admin/cats/1', request.url));
   }
 
-  return NextResponse.next();
+  return (authMiddleware as any)(request);
 }
