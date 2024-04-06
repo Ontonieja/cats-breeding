@@ -1,7 +1,7 @@
-import Image from "next/image";
-import { FC } from "react";
-import { ICard } from "@/types/Cards";
-import { ChevronCircle } from "../Icons/Icons";
+import Image from 'next/image';
+import { FC } from 'react';
+import { ICard } from '@/types/Cards';
+import { ChevronCircle } from '../Icons/Icons';
 interface CardProps {
   card: ICard;
 }
@@ -18,7 +18,7 @@ const Card: FC<CardProps> = ({ card }) => {
   const titleCapitalized = title.charAt(0).toUpperCase() + title.slice(1);
   return (
     <div
-      className={`relative flex flex-col items-center py-8 px-6 max-w-[240px] rounded-[48px] shadow-card ${cardContainerClasses} mb-12 cursor-pointer`}
+      className={`relative flex flex-col items-center py-8 px-6 max-w-[240px] rounded-[48px] shadow-card ${cardContainerClasses} mb-12 cursor-pointer duration-500 hover:-translate-y-1`}
     >
       <div className="size-[140px] flex items-center">
         <Image src={img} alt={alt || description} />
