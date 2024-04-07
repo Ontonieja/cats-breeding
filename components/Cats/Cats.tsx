@@ -1,29 +1,24 @@
-import Image from "next/image";
-import Cards from "../Cards/Cards";
-import { mainPageMenuCards } from "@/constants/CardsElements";
-import SectionWrapper from "../Wrappers/SectionWrappers";
-import catsYoga from "@/public/cats-yoga.png";
+import Image from 'next/image';
+import Cards from '../Cards/Cards';
+import { mainPageMenuCards } from '@/constants/CardsElements';
+import SectionWrapper from '../Wrappers/SectionWrappers';
+import catsYoga from '@/public/cats-yoga.png';
+import Section from '../Sections/Section';
 
 const Cats = () => {
   return (
     <SectionWrapper>
-      <div className="flex justify-between items-center max-container relative max-sm:flex-col">
-        <div className="max-w-prose">
-          <h2 className="text-4xl font-madimi ">Nasze koty</h2>
-          <p className="mt-2 text-lg">
-            Zapraszamy Cię do poznania naszych czworonożnych przyjaciół i
-            znalezienia swojego idealnego towarzysza życia. Odkryj prawdziwą
-            miłość kotów z naszą hodowlą
-          </p>
-        </div>
-        <Image
-          src={catsYoga}
-          height={180}
-          alt="Kobieta z kotem uprawiajaca yoge"
-          className="max-sm:w-[150px] max-sm:self-start max-sm:order-[-1] max-sm:mb-2"
-        />
-      </div>
-
+      <Section
+        title="Nasze koty"
+        image={catsYoga}
+        imageAlt="Kobieta z kotem uprawiająca yoge"
+      >
+        <p>
+          Zapraszamy Cię do poznania naszych czworonożnych przyjaciół i
+          znalezienia swojego idealnego towarzysza życia. Odkryj prawdziwą
+          miłość kotów z naszą hodowlą
+        </p>
+      </Section>
       <Cards cardElements={mainPageMenuCards} />
     </SectionWrapper>
   );

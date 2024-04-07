@@ -1,19 +1,27 @@
-"use client";
-import Link from "next/link";
-import { IconContext } from "react-icons";
-import { IoPaw } from "react-icons/io5";
-import { FaArrowCircleRight } from "react-icons/fa";
-import { FaChevronRight } from "react-icons/fa6";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { BiLogoInstagramAlt } from "react-icons/bi";
-import { FaFacebook } from "react-icons/fa";
+'use client';
+import Link from 'next/link';
+import { FC, ReactNode } from 'react';
+import { IconContext } from 'react-icons';
+import { IoPaw } from 'react-icons/io5';
+import { FaArrowCircleRight } from 'react-icons/fa';
+import { FaChevronRight } from 'react-icons/fa6';
+import { IoCloudUploadOutline } from 'react-icons/io5';
+import { RxHamburgerMenu } from 'react-icons/rx';
+import { BiLogoInstagramAlt } from 'react-icons/bi';
+import { FaFacebook } from 'react-icons/fa';
+import { MdDeleteOutline } from 'react-icons/md';
+
+interface IconProviderProps {
+  className?: string;
+  children?: ReactNode;
+}
 
 export const RightArrow = () => {
   return (
     <IconContext.Provider
       value={{
-        color: "coral-red",
-        className: "global-class-name text-coral-red text-xl ml-2",
+        color: 'coral-red',
+        className: 'global-class-name text-coral-red text-xl ml-2',
       }}
     >
       <FaArrowCircleRight />
@@ -25,9 +33,9 @@ export const PawLogo = () => {
   return (
     <IconContext.Provider
       value={{
-        color: "coral-red",
+        color: 'coral-red',
         className:
-          "global-class-name text-coral-red text-4xl mr-2 max-sm:text-4xl",
+          'global-class-name text-coral-red text-4xl mr-2 max-sm:text-4xl',
       }}
     >
       <IoPaw />
@@ -39,8 +47,8 @@ export const ChevronCircle = () => {
   return (
     <IconContext.Provider
       value={{
-        color: "coral-red",
-        className: "global-class-name bg-white rounded-full",
+        color: 'coral-red',
+        className: 'global-class-name bg-white rounded-full',
       }}
     >
       <FaChevronRight />
@@ -52,8 +60,8 @@ export const HamburgerIcon = () => {
   return (
     <IconContext.Provider
       value={{
-        color: "coral-red",
-        className: "global-class-name size-8",
+        color: 'coral-red',
+        className: 'global-class-name size-8',
       }}
     >
       <RxHamburgerMenu />
@@ -65,9 +73,9 @@ export const InstagramIcon = () => {
   return (
     <IconContext.Provider
       value={{
-        color: "white",
+        color: 'white',
         className:
-          "global-class-name bg-pale-blue p-2 max-sm:p-1 color-blue  max-sm:size-8 size-10 rounded-xl hover:bg-[#0351A1] transition ease-in-out duration-300 ",
+          'global-class-name bg-pale-blue p-2 max-sm:p-1 color-blue  max-sm:size-8 size-10 rounded-xl hover:bg-[#0351A1] transition ease-in-out duration-300 ',
       }}
     >
       <Link
@@ -84,14 +92,35 @@ export const FacebookIcon = () => {
   return (
     <IconContext.Provider
       value={{
-        color: "white",
+        color: 'white',
         className:
-          "global-class-name bg-pale-blue p-2 max-sm:p-[5px] color-blue  size-10 max-sm:size-8 rounded-xl hover:bg-[#0351A1] transition ease-in-out duration-300 ",
+          'global-class-name bg-pale-blue p-2 max-sm:p-[5px] color-blue  size-10 max-sm:size-8 rounded-xl hover:bg-[#0351A1] transition ease-in-out duration-300 ',
       }}
     >
       <Link href="https://www.facebook.com/SamoSzczesciePL" target="_blank">
         <FaFacebook />
       </Link>
+    </IconContext.Provider>
+  );
+};
+
+export const UploadIcon = () => {
+  return (
+    <IconContext.Provider value={{}}>
+      <IoCloudUploadOutline />
+    </IconContext.Provider>
+  );
+};
+
+export const DeleteIcon: FC<IconProviderProps> = ({ className }) => {
+  return (
+    <IconContext.Provider
+      value={{
+        color: '',
+        className: `${className}`,
+      }}
+    >
+      <MdDeleteOutline />
     </IconContext.Provider>
   );
 };

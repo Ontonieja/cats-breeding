@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { PawLogo } from "../Icons/Icons";
-import { HamburgerIcon } from "../Icons/Icons";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { PawLogo } from '../Icons/Icons';
+import { HamburgerIcon } from '../Icons/Icons';
 import {
   AiOutlineClose,
   AiOutlineFacebook,
   AiOutlineInstagram,
-} from "react-icons/ai";
-import { useState } from "react";
+} from 'react-icons/ai';
+import { useState } from 'react';
 
 const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,7 +35,7 @@ const Nav = () => {
           <li>
             <Link
               href="/"
-              className={`${pathname === "/" ? "text-coral-red" : ""} `}
+              className={`${pathname === '/' ? 'text-coral-red' : ''} `}
             >
               Strona główna
             </Link>
@@ -43,7 +43,7 @@ const Nav = () => {
           <li>
             <Link
               href="/kocury"
-              className={`${pathname === "/kocury" ? "text-coral-red" : ""} `}
+              className={`${pathname === '/kocury' ? 'text-coral-red' : ''} `}
             >
               Kocury
             </Link>
@@ -51,7 +51,7 @@ const Nav = () => {
           <li>
             <Link
               href="/kotki"
-              className={`${pathname === "/kotki" ? "text-coral-red" : ""} `}
+              className={`${pathname === '/kotki' ? 'text-coral-red' : ''} `}
             >
               Kotki
             </Link>
@@ -59,7 +59,7 @@ const Nav = () => {
           <li>
             <Link
               href="/kocieta"
-              className={`${pathname === "/kocieta" ? "text-coral-red" : ""} `}
+              className={`${pathname === '/kocieta' ? 'text-coral-red' : ''} `}
             >
               Kocięta
             </Link>
@@ -67,7 +67,7 @@ const Nav = () => {
           <li>
             <Link
               href="/kontakt"
-              className={`${pathname === "/kontakt" ? "text-coral-red" : ""} `}
+              className={`${pathname === '/kontakt' ? 'text-coral-red' : ''} `}
             >
               Kontakt
             </Link>
@@ -76,8 +76,8 @@ const Nav = () => {
         <div
           className={
             menuOpen
-              ? "fixed right-0 top-0 w-[65%] sm:hidden h-screen bg-[#F5F5F5] p-10 ease-in duration-500 shadow-card-strong z-20"
-              : "fixed right-[-100%] top-0 p-10 ease-out duration-500 h-screen "
+              ? 'fixed right-0 top-0 w-[65%] sm:hidden h-screen bg-[#F5F5F5] p-10 ease-in duration-500 shadow-card-strong z-20'
+              : 'fixed right-[-100%] top-0 p-10 ease-out duration-500 h-screen '
           }
         >
           <div className="flex w-full items-center justify-end ">
@@ -114,13 +114,13 @@ const Nav = () => {
               href="https://www.instagram.com/samo_szczescie_cattery/"
               target="_blank"
             >
-              <AiOutlineInstagram size={30}></AiOutlineInstagram>
+              <AiOutlineInstagram size={30} />
             </Link>
             <Link
               href="https://www.facebook.com/SamoSzczesciePL"
               target="_blank"
             >
-              <AiOutlineFacebook size={30}></AiOutlineFacebook>
+              <AiOutlineFacebook size={30} />
             </Link>
           </div>
         </div>
