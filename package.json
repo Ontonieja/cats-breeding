@@ -14,10 +14,11 @@
   },
   "dependencies": {
     "@prisma/client": "latest",
-    "prisma": "latest",
     "cloudinary": "^2.0.3",
+    "firebase": "^10.10.0",
     "next": "14.0.3",
     "next-auth": "^4.24.7",
+    "prisma": "latest",
     "react": "^18",
     "react-cookie": "^6.1.1",
     "react-dom": "^18",
