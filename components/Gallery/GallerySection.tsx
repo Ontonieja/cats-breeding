@@ -21,8 +21,8 @@ const GallerySection = async () => {
           <InstagramIcon />
           <FacebookIcon />
         </div>
-        <Gallery />
       </Section>
+      <Gallery />
     </SectionWrapper>
   );
 };
