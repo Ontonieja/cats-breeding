@@ -51,3 +51,7 @@ enum Gender {
   FEMALE
   KID
 }
+model GalleryImage {
+  id       Int    @id @default(autoincrement())
+  url     String  
+}
