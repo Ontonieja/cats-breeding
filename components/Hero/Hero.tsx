@@ -1,6 +1,6 @@
-import Image from "next/image";
-import heroImg from "public/hero2.png";
-import CallToAction from "./CallToAction";
+import Image from 'next/image';
+import heroImg from 'public/hero2.png';
+import CallToAction from './CallToAction';
 
 const Hero = () => {
   return (
@@ -10,7 +10,7 @@ const Hero = () => {
           <h1 className="text-8xl font-madimi leading-[1.1] max-sm:leading-[60px] max-md:text-[48px] ">
             Zakochaj się w Świecie Kotów z Naszą Hodowlą
           </h1>
-          <p className="mt-6 mb-12 text-lg sm:max-w-xl">
+          <p className="mt-6 sm:mt-12 mb-12 text-xl sm:text-2xl sm:max-w-xl leading-10">
             Odkryj wyjątkowy charakter naszych kotów i znajdź swojego futrzanego
             przyjaciela już dziś
           </p>
