@@ -62,7 +62,7 @@ const Admin: FC = () => {
   const totalPages = Math.ceil(totalCats / resultsPerPage);
 
   return (
-    <div className="container p-10 m-auto">
+    <div>
       <Button buttonStyle="primary" type="button" onClick={handleCreateCat}>
         Dodaj kota
       </Button>
