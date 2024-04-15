@@ -7,10 +7,10 @@ const Hero = () => {
     <section className="padding-x padding-t padding-b">
       <section className="flex items-center justify-between w-full max-container flex-col xl:flex-row">
         <div className="flex flex-col xl:w-3/5 w-full">
-          <h1 className="text-8xl font-madimi leading-[1.1] max-sm:leading-[60px] max-md:text-[48px] ">
+          <h1 className="text-8xl font-madimi leading-[1.1] max-sm:leading-[60px] max-md:text-[48px]">
             Zakochaj się w Świecie Kotów z Naszą Hodowlą
           </h1>
-          <p className="mt-6 sm:mt-12 mb-12 text-xl sm:text-2xl sm:max-w-xl leading-10">
+          <p className="mt-6 sm:mt-12 mb-12 text-xl sm:text-hero sm:max-w-xl">
             Odkryj wyjątkowy charakter naszych kotów i znajdź swojego futrzanego
             przyjaciela już dziś
           </p>

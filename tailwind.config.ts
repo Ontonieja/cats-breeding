@@ -20,6 +20,7 @@ const config: Config = {
       '3xl': ['28px', '50px'],
       '4xl': ['48px', '58px'],
       '8xl': ['96px', '106px'],
+      hero: ['24px', '38px'],
     },
     extend: {
       colors: {
