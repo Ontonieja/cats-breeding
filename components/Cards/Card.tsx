@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 import { ICard } from '@/types/Cards';
 import { ChevronCircle } from '../Icons/Icons';
+import Link from 'next/link';
 interface CardProps {
   card: ICard;
 }
@@ -17,20 +18,22 @@ const Card: FC<CardProps> = ({ card }) => {
   } = card;
   const titleCapitalized = title.charAt(0).toUpperCase() + title.slice(1);
   return (
-    <div
-      className={`relative flex flex-col items-center py-8 px-6 max-w-[240px] rounded-[48px] shadow-card ${cardContainerClasses} mb-12 cursor-pointer duration-500 hover:-translate-y-1`}
-    >
-      <div className="size-[140px] flex items-center">
-        <Image src={img} alt={alt || description} />
-      </div>
-      <h3 className="font-medium text-2xl py-4 mt-4">{titleCapitalized}</h3>
-      <p className="mb-4">{description}</p>
+    <Link href={card.href}>
       <div
-        className={`justify-center items-center flex absolute bottom-[-6%] p-3 border-2 ${navContainerClasses} rounded-full bg-white cursor-pointer  `}
+        className={`relative flex flex-col items-center py-8 px-6 max-w-[240px] rounded-[48px] shadow-card ${cardContainerClasses} mb-12 cursor-pointer duration-500 hover:-translate-y-1`}
       >
-        <ChevronCircle />
+        <div className="size-[140px] flex items-center">
+          <Image src={img} alt={alt || description} />
+        </div>
+        <h3 className="font-medium text-2xl py-4 mt-4">{titleCapitalized}</h3>
+        <p className="mb-4">{description}</p>
+        <div
+          className={`justify-center items-center flex absolute bottom-[-6%] p-3 border-2 ${navContainerClasses} rounded-full bg-white cursor-pointer  `}
+        >
+          <ChevronCircle />
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
