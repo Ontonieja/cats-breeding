@@ -7,4 +7,5 @@ export interface ICard {
   alt?: string;
   cardContainerClasses: string;
   navContainerClasses: string;
+  href: string;
 }

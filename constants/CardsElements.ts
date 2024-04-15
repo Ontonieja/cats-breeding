@@ -10,6 +10,7 @@ export const mainPageMenuCards = [
     alt: '',
     cardContainerClasses: 'bg-light-blue',
     navContainerClasses: 'border-light-blue',
+    href: '/kocury',
   },
   {
     title: 'kotki',
@@ -18,6 +19,7 @@ export const mainPageMenuCards = [
     alt: '',
     cardContainerClasses: 'bg-light-pink',
     navContainerClasses: 'border-light-pink',
+    href: '/kotki',
   },
   {
     title: 'kocięta',
@@ -26,5 +28,6 @@ export const mainPageMenuCards = [
     alt: '',
     cardContainerClasses: 'bg-light-green',
     navContainerClasses: 'border-light-green',
+    href: '/kocieta',
   },
 ];
