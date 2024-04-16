@@ -11,6 +11,7 @@ const About = () => {
         image={catAbout}
         imageAlt="Kobieta z kotem uprawiajaca yoge"
         imageFirst
+        id="about"
       >
         <p>
           Jesteśmy siostrami z pasją do kotów brytyjskich, prowadzącymi hodowlę
