@@ -1,10 +1,10 @@
-import { PawLogo } from "../Icons/Icons";
-import catsHead from "@/public/cat-head.png";
-import Image from "next/image";
-import SectionWrapper from "../Wrappers/SectionWrappers";
+import { LinkedinIcon, PawLogo } from '../Icons/Icons';
+import catsHead from '@/public/cat-head.png';
+import Image from 'next/image';
+import SectionWrapper from '../Wrappers/SectionWrappers';
 const Footer = () => {
   return (
-    <footer className="padding-t max-w-full">
+    <footer className="padding-t max-w-full relative">
       <div className="bg-[#434343] min-h-44 rounded-t-3xl flex items-center text-white justify-between sm:px-12 px-4 relative  max-sm:gap-16">
         <div className="flex text-white font-madimi max-sm:flex-1 items-center ">
           <PawLogo />
@@ -25,6 +25,10 @@ const Footer = () => {
           alt="głowa kota"
           className="absolute left-1/2 right-1/2 transform -translate-x-1/2 -translate-y-1/2 -z-10  "
         />
+        <div className="absolute bottom-0 right-0 mb-2 mr-12 flex items-center gap-2 text-sm">
+          @Maksymilian Rusnak 2024
+          <LinkedinIcon />
+        </div>
       </div>
     </footer>
   );

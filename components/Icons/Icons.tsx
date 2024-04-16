@@ -10,6 +10,7 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { BiLogoInstagramAlt } from 'react-icons/bi';
 import { FaFacebook } from 'react-icons/fa';
 import { MdDeleteOutline } from 'react-icons/md';
+import { FaLinkedin } from 'react-icons/fa';
 
 interface IconProviderProps {
   className?: string;
@@ -99,6 +100,23 @@ export const FacebookIcon = () => {
     >
       <Link href="https://www.facebook.com/SamoSzczesciePL" target="_blank">
         <FaFacebook />
+      </Link>
+    </IconContext.Provider>
+  );
+};
+export const LinkedinIcon = () => {
+  return (
+    <IconContext.Provider
+      value={{
+        color: 'white',
+        className: 'size-6',
+      }}
+    >
+      <Link
+        href="https://www.linkedin.com/in/maksymilian-rusnak/"
+        target="_blank"
+      >
+        <FaLinkedin />
       </Link>
     </IconContext.Provider>
   );
