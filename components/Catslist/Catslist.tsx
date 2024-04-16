@@ -6,17 +6,20 @@ import { TCatGender } from '@/types/Cats';
 
 interface CatCardProps {
   gender?: TCatGender;
+  href: string;
 }
-const CatsList: FC<CatCardProps> = async ({ gender }) => {
+const CatsList: FC<CatCardProps> = async ({ gender, href }) => {
   const catsGender = gender || 'MALE';
   const cats = await db.cat.findMany({
     where: { genderGroup: catsGender },
   });
 
   return (
-    <div className="padding-y max-container grid sm:grid-cols-1 md:grid-cols-2 w-full gap-4">
+    <div className="padding-y max-container grid sm:grid-cols-1 lg:grid-cols-2 w-full gap-6">
       {cats.map((cat) => {
-        return <CatCard gender={catsGender} cat={cat} key={cat.id} />;
+        return (
+          <CatCard gender={catsGender} cat={cat} key={cat.id} href={href} />
+        );
       })}
     </div>
   );
