@@ -33,8 +33,8 @@ const Nav = () => {
         </div>
         <ul className="gap-16 text-xl font-medium hidden md:flex max-lg:gap-6">
           <NavDesktopElement title="Strona główna" href="/" />
-          <NavDesktopElement title="Kocury" href="/kocury" />
           <NavDesktopElement title="Kotki" href="/kotki" />
+          <NavDesktopElement title="Kocury" href="/kocury" />
           <NavDesktopElement title="Kocięta" href="/kocieta" />
           <NavDesktopElement title="Kontakt" href="/kontakt" />
         </ul>
@@ -58,15 +58,16 @@ const Nav = () => {
                 onClick={handleNav}
               />
               <NavMobileElement
-                title="Kocury"
-                href={'/kocury'}
-                onClick={handleNav}
-              />
-              <NavMobileElement
                 title="Kotki"
                 href={'/kotki'}
                 onClick={handleNav}
               />
+              <NavMobileElement
+                title="Kocury"
+                href={'/kocury'}
+                onClick={handleNav}
+              />
+
               <NavMobileElement
                 title="Kocięta"
                 href={'/kocieta'}
