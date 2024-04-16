@@ -31,9 +31,10 @@ const Nav = () => {
         <div className="md:hidden block" onClick={handleNav}>
           <HamburgerIcon />
         </div>
-        <ul className="gap-24 text-xl font-medium hidden md:flex max-lg:gap-6">
+        <ul className="gap-16 text-xl font-medium hidden md:flex max-lg:gap-6">
           <NavDesktopElement title="Strona główna" href="/" />
           <NavDesktopElement title="Kocury" href="/kocury" />
+          <NavDesktopElement title="Kotki" href="/kotki" />
           <NavDesktopElement title="Kocięta" href="/kocieta" />
           <NavDesktopElement title="Kontakt" href="/kontakt" />
         </ul>
@@ -59,6 +60,11 @@ const Nav = () => {
               <NavMobileElement
                 title="Kocury"
                 href={'/kocury'}
+                onClick={handleNav}
+              />
+              <NavMobileElement
+                title="Kotki"
+                href={'/kotki'}
                 onClick={handleNav}
               />
               <NavMobileElement
