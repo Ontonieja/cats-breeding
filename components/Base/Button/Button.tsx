@@ -26,7 +26,7 @@ const Button = ({
 }: ButtonProps) => {
   const styles = {
     primary:
-      'bg-pale-blue text-white font-semibold hover:bg-[#0351A1] transition ease-in-out duration-300',
+      'bg-pale-blue text-white font-semibold hover:bg-[#0351A1] border-2 border-[#0351A1] transition ease-in-out duration-300 ',
     secondary:
       'border-2 border-pale-blue text-pale-blue font-semibold hover:bg-pale-blue transition ease-in-out duration-500 hover:text-white',
     back: 'bg-primary-dark text-primary-light-text',
