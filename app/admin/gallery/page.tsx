@@ -5,7 +5,7 @@ import {
   getGalleryImages,
 } from '@/db/src/services/galleryData';
 import { GalleryImage } from '@prisma/client';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import DragAndDropFiles from '@/utils/DragAndDropFiles';
 import { ICustomFile } from '@/types/Files';
@@ -23,7 +23,7 @@ const Gallery = () => {
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const handleChange = async (file: File) => {
+  const handleChange = useCallback(async (file: File) => {
     try {
       const base64String = await readFileAsDataURL(file);
       const format = file.type.split('/')[1];
@@ -35,7 +35,7 @@ const Gallery = () => {
     } catch (error) {
       console.error('Error reading file:', error);
     }
-  };
+  }, []);
 
   const handleDelete = async (idToDelete: number, urlToDelete: string) => {
     try {
@@ -55,7 +55,7 @@ const Gallery = () => {
     };
 
     fetchImages();
-  }, []);
+  }, [handleChange]);
 
   return (
     <div>
