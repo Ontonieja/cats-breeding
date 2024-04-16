@@ -1,6 +1,6 @@
-import SectionWrapper from '@/components/Wrappers/SectionWrappers';
 import { db } from '@/db';
-import { PiChatDotsDuotone } from 'react-icons/pi';
+import CatDetail from '@/components/CatDetail/CatDetail';
+import NotFound from './not-found';
 
 interface CatDetailPageProps {
   params: {
@@ -9,13 +9,14 @@ interface CatDetailPageProps {
 }
 
 export default async function CatDetailPage({ params }: CatDetailPageProps) {
-  const catDetail = await db.cat.findFirst({
-    where: { slug: params.slug },
+  const catSlug = params.slug;
+  const catInfo = await db.cat.findFirst({
+    where: { slug: catSlug },
   });
 
-  return (
-    <SectionWrapper>
-      <section className="max-container"></section>;
-    </SectionWrapper>
-  );
+  if (catInfo) {
+    return <CatDetail catInfo={catInfo} />;
+  } else {
+    return NotFound();
+  }
 }
