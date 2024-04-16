@@ -19,13 +19,13 @@ export default function CatDetail({ catInfo }: CatDetailProps) {
             </h1>
             <p>{catInfo?.description}</p>
           </div>
-          <div className="w-2/5 max-sm:w-full">
+          <div className="w-full sm:w-3/5 lg:2/5">
             <Image src={demoCat} alt="kot" className="rounded-xl shadow-card" />
           </div>
         </div>
 
         <div className="flex gap-12 padding-y max-sm:flex-col-reverse">
-          <div className="w-2/5 max-sm:w-full">
+          <div className="w-full sm:w-3/5 lg:2/5">
             <Image src={demoCat} alt="kot" className="rounded-xl shadow-card" />
           </div>
           <div className="w-3/5 text-xl max-sm:w-full">
@@ -51,7 +51,7 @@ export default function CatDetail({ catInfo }: CatDetailProps) {
               <p>
                 <b>Kolor: </b> {catInfo?.color}
               </p>
-              <div className="flex gap-4 mt-4">
+              <div className="flex gap-4 mt-4 ">
                 <Button type="button" buttonStyle="whiteBlue">
                   Rodowód
                 </Button>
@@ -66,25 +66,27 @@ export default function CatDetail({ catInfo }: CatDetailProps) {
         <div className="padding-y">
           <h3 className="font-madimi text-4xl">Galeria</h3>
           <div className="sm:grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 auto-rows-[200px] gap-4 my-10 overflow-x-scroll sm:overflow-visible flex flex-nowrap sm:flex-wrap max-container">
-            <div>
+            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
               <Image src={demoCat} alt="demoCat"></Image>
             </div>
-            <div>
+            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
               <Image src={demoCat} alt="demoCat"></Image>
             </div>
-            <div>
+            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
               <Image src={demoCat} alt="demoCat"></Image>
             </div>
-            <div>
+            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
               <Image src={demoCat} alt="demoCat"></Image>
             </div>
-            <div>
+            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
+              <Image src={demoCat} alt="demoCat"></Image>
+            </div>
+            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
               <Image src={demoCat} alt="demoCat"></Image>
             </div>
           </div>
         </div>
       </section>
-      ;
     </SectionWrapper>
   );
 }

@@ -9,7 +9,7 @@ const Kocury = () => {
         title="Kocury"
         description="Nasze kocury to nie tylko zwierzęta, ale także członkowie naszej rodziny. Każdy z nich ma swoją historię i osobowość. Przedstawiamy Ci kilku z nich:"
       ></Catshero>
-      <CatsList href="/kocury" />
+      <CatsList href="/kocury" bgColor="bg-light-blue" />
     </SectionWrapper>
   );
 };

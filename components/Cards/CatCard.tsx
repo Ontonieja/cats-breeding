@@ -9,17 +9,19 @@ interface CatCardProps {
   cat: Cat;
   gender: string;
   href: string;
+  bgColor: string;
 }
 
-const CatCard: FC<CatCardProps> = ({ gender, cat, href }) => {
+const CatCard: FC<CatCardProps> = ({ gender, cat, href, bgColor }) => {
   return (
     <Link key={cat.id} href={`${href}/${cat.slug}`}>
-      <div className="flex max-sm:flex-col bg-light-blue p-6 rounded-xl sm:h-[242px] w-full box-border shadow-xl duration-500 hover:-translate-y-1">
+      <div
+        className={`flex max-sm:flex-col ${bgColor}  p-6 rounded-xl sm:h-[242px] w-full box-border shadow-xl duration-500 hover:-translate-y-1`}
+      >
         <Image
           alt={cat.name || ''}
           src={demoCat}
-          width={220}
-          className="max-sm:self-center object-cover rounded-xl"
+          className="max-sm:self-center sm:max-w-[220px] object-cover rounded-xl"
         ></Image>
 
         <div className="flex flex-col h-full w-full sm:px-8">
