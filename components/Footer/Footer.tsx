@@ -25,7 +25,7 @@ const Footer = () => {
           alt="głowa kota"
           className="absolute left-1/2 right-1/2 transform -translate-x-1/2 -translate-y-1/2 -z-10  "
         />
-        <div className="absolute bottom-0 right-0 mb-2 mr-12 flex items-center gap-2 text-sm">
+        <div className="absolute bottom-0 right-0 mb-2 sm:mr-10  mr-4 flex items-center max-sm:text-xs gap-2">
           @Maksymilian Rusnak 2024
           <LinkedinIcon />
         </div>
