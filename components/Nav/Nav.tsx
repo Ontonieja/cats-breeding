@@ -9,17 +9,40 @@ import {
   AiOutlineFacebook,
   AiOutlineInstagram,
 } from 'react-icons/ai';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavDesktopElement, NavMobileElement } from './NavElements';
 const Nav = () => {
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navHidden = ' top-[-100%] transition-all  duration-600 ease-out';
+  const navVisible =
+    ' w-full fixed top-0 z-50 transition:ease-in-out duration-300 bg-white shadow-card';
   const handleNav = () => {
     setMenuOpen(!menuOpen);
-    console.log(menuOpen);
   };
-  const pathname = usePathname();
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      if (window.scrollY <= window.innerHeight) {
+        setVisible(false);
+      } else {
+        setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+        setPrevScrollPos(currentScrollPos);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollPos]);
+
   return (
-    <header className="padding-x py-8">
+    <header
+      className={`padding-x py-8 block ${visible ? navVisible : navHidden}`}
+    >
       <nav className="flex justify-between items-center max-container">
         <Link href="/" className="flex items-center font-madimi">
           <PawLogo />
@@ -28,7 +51,7 @@ const Nav = () => {
             Samo <br></br>Szczęście
           </span>
         </Link>
-        <div className="md:hidden block" onClick={handleNav}>
+        <div className="md:hidden block " onClick={handleNav}>
           <HamburgerIcon />
         </div>
         <ul className="gap-16 text-xl font-medium hidden md:flex max-lg:gap-6">
@@ -80,7 +103,7 @@ const Nav = () => {
               />
             </ul>
           </div>
-          <div className="flex justify-evenly pt-10 items-center">
+          <div className="flex gap-8 pt-8 items-center">
             <Link
               href="https://www.instagram.com/samo_szczescie_cattery/"
               target="_blank"

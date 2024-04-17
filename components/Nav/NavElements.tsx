@@ -33,7 +33,7 @@ export function NavMobileElement({
   const pathname = usePathname();
   return (
     <Link href={href} onClick={onClick}>
-      <li className="py-4 cursor-pointer">{title} </li>
+      <li className="py-3 cursor-pointer flex gap-2 items-center">{title}</li>
     </Link>
   );
 }
