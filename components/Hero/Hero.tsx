@@ -20,7 +20,7 @@ const Hero = () => {
           src={heroImg}
           width={520}
           alt="Kobieta trzymajaca kota"
-          className=" max-md:w-[340px] max-xl:padding-t  block justify-self-start self-center"
+          className=" max-xl:hidden max-xl:padding-t block justify-self-start self-center"
         />
       </section>
     </section>
