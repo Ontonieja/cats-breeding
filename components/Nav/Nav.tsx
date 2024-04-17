@@ -13,11 +13,11 @@ import { useState, useEffect } from 'react';
 import { NavDesktopElement, NavMobileElement } from './NavElements';
 const Nav = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const navHidden = ' top-[-100%] transition-all  duration-600 ease-out';
+  const navHidden = 'top-[-100%] transition ease-out duration-300';
   const navVisible =
-    ' w-full fixed top-0 z-50 transition:ease-in-out duration-300 bg-white shadow-card';
+    ' w-full fixed top-0 z-50 duration-300 bg-white shadow-card';
   const handleNav = () => {
     setMenuOpen(!menuOpen);
   };
