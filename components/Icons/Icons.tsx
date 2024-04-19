@@ -10,6 +10,7 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { BiLogoInstagramAlt } from 'react-icons/bi';
 import { FaFacebook } from 'react-icons/fa';
 import { MdDeleteOutline } from 'react-icons/md';
+import { MdOutlineEmail } from 'react-icons/md';
 import { FaLinkedin } from 'react-icons/fa';
 
 interface IconProviderProps {
@@ -126,6 +127,14 @@ export const UploadIcon = () => {
   return (
     <IconContext.Provider value={{}}>
       <IoCloudUploadOutline />
+    </IconContext.Provider>
+  );
+};
+
+export const EmailIcon = () => {
+  return (
+    <IconContext.Provider value={{}}>
+      <MdOutlineEmail />
     </IconContext.Provider>
   );
 };
