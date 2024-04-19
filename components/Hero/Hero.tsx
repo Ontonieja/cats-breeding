@@ -5,9 +5,9 @@ import CallToAction from './CallToAction';
 const Hero = () => {
   return (
     <section className="padding-x padding-t padding-b">
-      <section className="flex items-center justify-between w-full max-container flex-col xl:flex-row">
+      <section className="flex items-center justify-between w-full max-container flex-col md:flex-row">
         <div className="flex flex-col xl:w-3/5 w-full">
-          <h1 className="text-8xl font-madimi leading-[1.1] max-sm:leading-[60px] max-md:text-[48px]">
+          <h1 className="text-8xl font-madimi leading-[1.1] max-sm:leading-[60px] max-xl:text-[48px]">
             Zakochaj się w Świecie Kotów z Naszą Hodowlą
           </h1>
           <p className="mt-6 sm:mt-12 mb-12 text-xl sm:text-hero sm:max-w-xl">
@@ -20,7 +20,7 @@ const Hero = () => {
           src={heroImg}
           width={520}
           alt="Kobieta trzymajaca kota"
-          className=" max-xl:hidden max-xl:padding-t block justify-self-start self-center"
+          className=" max-md:hidden block justify-self-start self-center"
         />
       </section>
     </section>

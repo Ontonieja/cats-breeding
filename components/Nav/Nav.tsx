@@ -11,24 +11,25 @@ import {
 } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import { NavDesktopElement, NavMobileElement } from './NavElements';
+import { setCurrentScreen } from 'firebase/analytics';
 const Nav = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const navHidden = 'top-[-100%] transition ease-out duration-300';
+  const navHidden = 'top-[-100%]';
   const navVisible =
-    ' w-full fixed top-0 z-50 duration-300 bg-white shadow-card';
+    ' w-full fixed top-0 z-50 duration-500 bg-white shadow-card';
   const handleNav = () => {
     setMenuOpen(!menuOpen);
   };
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-      if (window.scrollY <= window.innerHeight) {
-        setVisible(false);
-      } else {
-        setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      if (window.scrollY >= 200) {
+        setVisible(true);
         setPrevScrollPos(currentScrollPos);
+      } else {
+        setVisible(false);
       }
     };
 
