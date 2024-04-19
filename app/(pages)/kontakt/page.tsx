@@ -28,7 +28,7 @@ export default function Kontakt() {
               </p>
             </div>
           </div>
-          <div className="mt-20 flex max-sm:flex-col justify-around gap-4">
+          <div className="mt-20 max-sm:mt-8  flex max-sm:flex-col justify-around gap-4">
             <div className="flex items-center gap-4">
               <MdOutlineEmail className="size-6 text-coral-red" />
               <h2 className="text-xl font-madimi">
@@ -36,12 +36,12 @@ export default function Kontakt() {
               </h2>
             </div>
             <div className="flex items-center gap-4">
-              <FaPhoneAlt className="size-6 text-coral-red" />
+              <FaPhoneAlt className="size-5 text-coral-red" />
               <h2 className="text-xl font-madimi">+48 530 984 939</h2>
             </div>
           </div>
         </div>
-        <div className=" sm:w-1/2 bg-light-blue rounded-3xl p-12">
+        <div className=" sm:w-1/2 bg-light-blue rounded-3xl max-sm:p-6 p-12">
           <div className=" rounded-2xl shadow-xl flex-col px-6 py-6  bg-white sm:px-12 sm:py-12">
             <h1 className="text-4xl font-madimi max-sm:text-3xl">
               Skontaktuj się z nami

@@ -21,6 +21,7 @@ export default function ContactForm() {
       setIsError(!succes);
       setEmail('');
       setMessage('');
+      setCharCount(0);
     } catch (e) {
       console.log(e);
       setIsSuccess(false);
