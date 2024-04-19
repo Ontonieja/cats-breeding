@@ -11,7 +11,7 @@ export default function Kontakt() {
   return (
     <SectionWrapper>
       <div className="max-container flex max-sm:flex-col gap-8 mb-12">
-        <div className="w-full sm:w-1/2 flex-col ">
+        <div className="w-full sm:w-1/2 flex-col self-center ">
           <div className="flex gap-4 justify-between items-center">
             <Image
               src={contactImg}
