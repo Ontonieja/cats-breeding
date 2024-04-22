@@ -17,7 +17,11 @@ export function NavDesktopElement({ title, href }: NavDesktopElementProps) {
     <li>
       <Link
         href={href}
-        className={`${pathname === href ? 'text-coral-red' : ''} `}
+        className={`${
+          pathname === href
+            ? 'border-b-[3px] shadow-sm transition ease-in duration-500 border-coral-red'
+            : ''
+        } `}
       >
         {title}
       </Link>
