@@ -9,6 +9,7 @@ interface CatCardProps {
   href: string;
   bgColor: string;
 }
+
 const CatsList: FC<CatCardProps> = async ({ gender, href, bgColor }) => {
   const catsGender = gender || 'MALE';
   const cats = await db.cat.findMany({
