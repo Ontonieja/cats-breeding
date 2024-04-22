@@ -22,7 +22,7 @@ export default function Kontakt() {
             <div className="flex-col">
               <h1 className="text-4xl font-madimi">Kontakt</h1>
               <p className="md:text-xl mt-2">
-                Masz pytania? Skorzystaj z formularza poniżej lub skontaktuj się
+                Masz pytania? Skorzystaj z formularza lub skontaktuj się
                 bezpośrednio. Odpowiemy tak szybko, jak to możliwe. Dziękujemy
                 za zainteresowanie naszą hodowlą!
               </p>
@@ -31,13 +31,13 @@ export default function Kontakt() {
           <div className="mt-20 max-sm:mt-8  flex max-sm:flex-col justify-around gap-4">
             <div className="flex items-center gap-4">
               <MdOutlineEmail className="size-6 text-coral-red" />
-              <h2 className="text-xl font-madimi">
+              <h2 className="sm:text-xl font-madimi">
                 samo.szczesciepl@gmail.com
               </h2>
             </div>
             <div className="flex items-center gap-4">
               <FaPhoneAlt className="size-5 text-coral-red" />
-              <h2 className="text-xl font-madimi">+48 530 984 939</h2>
+              <h2 className="sm:text-xl font-madimi">+48 530 984 939</h2>
             </div>
           </div>
         </div>
