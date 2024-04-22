@@ -8,13 +8,9 @@ import { GalleryImage } from '@prisma/client';
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import DragAndDropFiles from '@/utils/DragAndDropFiles';
-import { ICustomFile } from '@/types/Files';
-import {
-  deleteFile,
-  getFileDownloadUrl,
-  uploadFile,
-} from '@/services/firebase/storage';
+import { deleteFile } from '@/services/firebase/storage';
 import readFileAsDataURL from '@/db/src/helpers/readFileAsDataURL';
+import uploadFileUrl from '@/helpers/uploadFileUrl';
 import { DeleteIcon } from '@/components/Icons/Icons';
 
 const fileTypes: string[] = ['image/jpeg', 'image/png'];
@@ -25,12 +21,7 @@ const Gallery = () => {
 
   const handleChange = useCallback(async (file: File) => {
     try {
-      const base64String = await readFileAsDataURL(file);
-      const format = file.type.split('/')[1];
-      const uploadedImage = await uploadFile(base64String, file.name, format);
-      if (!uploadedImage)
-        throw new Error('Something went wrong, cannot upload file');
-      const fileUrl = await getFileDownloadUrl(uploadedImage);
+      const fileUrl = await uploadFileUrl(file);
       await createGalleryImage({ url: fileUrl });
     } catch (error) {
       console.error('Error reading file:', error);
