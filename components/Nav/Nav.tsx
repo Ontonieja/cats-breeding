@@ -12,7 +12,10 @@ import {
 import { useState, useEffect } from 'react';
 import { NavDesktopElement, NavMobileElement } from './NavElements';
 import { setCurrentScreen } from 'firebase/analytics';
-const Nav = () => {
+interface navElementProps {
+  navEl1: string;
+}
+const Nav = ({ navEl1 }: navElementProps) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -56,7 +59,7 @@ const Nav = () => {
           <HamburgerIcon />
         </div>
         <ul className="gap-16 text-xl font-medium hidden md:flex max-lg:gap-6">
-          <NavDesktopElement title="Strona główna" href="/" />
+          <NavDesktopElement title={navEl1} href="/" />
           <NavDesktopElement title="Kotki" href="/kotki" />
           <NavDesktopElement title="Kocury" href="/kocury" />
           <NavDesktopElement title="Kocięta" href="/kocieta" />
