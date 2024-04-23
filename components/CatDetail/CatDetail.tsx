@@ -8,7 +8,9 @@ import { db } from '@/db';
 interface CatDetailProps {
   catInfo: Cat;
 }
+
 export default async function CatDetail({ catInfo }: CatDetailProps) {
+  console.log('hello');
   const catPrimaryPhoto = await db.catPhoto.findFirst({
     where: {
       catId: catInfo?.id,
