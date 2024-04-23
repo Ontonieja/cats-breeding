@@ -4,7 +4,7 @@ import Image from 'next/image';
 import SectionWrapper from '../Wrappers/SectionWrappers';
 const Footer = () => {
   return (
-    <footer className="padding-t max-w-full relative">
+    <footer className="padding-t max-w-full mt-auto ">
       <div className="bg-[#434343] min-h-44 rounded-t-3xl flex items-center text-white justify-between sm:px-12 px-4 relative  max-sm:gap-16">
         <div className="flex text-white font-madimi max-sm:flex-1 items-center ">
           <PawLogo />
