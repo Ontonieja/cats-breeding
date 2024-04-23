@@ -30,24 +30,25 @@ model Cat {
   genderGroup Gender?
   photos      CatPhoto[]
   documents   CatDocument[]
-  gallery     CatGallery[]      
+  gallery     CatGallery[]
 }
 
 model CatPhoto {
-  id    Int    @id @default(autoincrement())
-  catId Int
-  Cat   Cat    @relation(fields: [catId], references: [id])
-  photo String
-  primary Boolean?
-  catGallery  CatGallery[] 
+  id         Int          @id @default(autoincrement())
+  catId      Int
+  Cat        Cat          @relation(fields: [catId], references: [id])
+  photo      String
+  primary    Boolean?
+  catGallery CatGallery[]
 }
-  model CatGallery{
-    id  Int @id @default(autoincrement())
-    catId   Int
-    photoId   Int   @unique
-    Cat   Cat    @relation(fields: [catId], references: [id])
-    CatPhoto    CatPhoto  @relation(fields: [photoId], references: [id])
-  }
+
+model CatGallery {
+  id       Int      @id @default(autoincrement())
+  catId    Int
+  photoId  Int      @unique
+  Cat      Cat      @relation(fields: [catId], references: [id])
+  CatPhoto CatPhoto @relation(fields: [photoId], references: [id], onDelete: Cascade)
+}
 
 model CatDocument {
   id       Int    @id @default(autoincrement())
@@ -61,7 +62,8 @@ enum Gender {
   FEMALE
   KID
 }
+
 model GalleryImage {
-  id       Int    @id @default(autoincrement())
-  url     String  
+  id  Int    @id @default(autoincrement())
+  url String
 }
