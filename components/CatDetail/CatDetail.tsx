@@ -5,12 +5,13 @@ import SectionWrapper from '@/components/Wrappers/SectionWrappers';
 import { Cat, CatPhoto } from '@prisma/client';
 import Button from '../Base/Button/Button';
 import { db } from '@/db';
+import { getCatGalleryPhotos } from '@/db/src/services/catPhotosData';
+
 interface CatDetailProps {
   catInfo: Cat;
 }
 
 export default async function CatDetail({ catInfo }: CatDetailProps) {
-  console.log('hello');
   const catPrimaryPhoto = await db.catPhoto.findFirst({
     where: {
       catId: catInfo?.id,
@@ -23,29 +24,31 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
       primary: false,
     },
   });
+  const galleryImages = await getCatGalleryPhotos(catInfo.id);
+
   return (
     <SectionWrapper>
       <section className="max-container">
-        <div className="flex gap-12 max-sm:flex-col ">
-          <div className="w-3/5 max-sm:w-full flex-col mt-2">
+        <div className="flex gap-12 max-md:flex-col ">
+          <div className="w-4/5 max-md:w-full flex-col mt-2">
             <h1 className="text-4xl font-madimi max-sm:mt-2">
               {catInfo?.name}
             </h1>
             <p>{catInfo?.description}</p>
           </div>
-          <div className="w-full sm:w-4/5 lg:2/5">
+          <div className="w-full md:w-4/5 lg:1/5">
             <Image
               src={catPrimaryPhoto?.photo || demoCat}
-              width={820}
-              height={490}
+              width={681}
+              height={383}
               alt="kot"
               className="rounded-xl shadow-card"
             />
           </div>
         </div>
 
-        <div className="flex gap-12 padding-y max-sm:flex-col-reverse">
-          <div className="w-full sm:w-4/5 lg:2/5">
+        <div className="flex gap-12 padding-y max-md:flex-col-reverse">
+          <div className="w-full md:w-4/5 lg:1/5">
             <Image
               src={catSecondaryPhoto?.photo || demoCat}
               width={820}
@@ -54,7 +57,7 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
               className="rounded-xl shadow-card"
             />
           </div>
-          <div className="w-3/5 text-xl max-sm:w-full">
+          <div className="w-4/5 text-xl max-md:w-full">
             <h2 className="text-4xl font-madimi max-sm:mt-2">Informacje</h2>
             <div className="gap-2 flex flex-col mt-2">
               <p>
@@ -91,25 +94,23 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
 
         <div className="padding-y">
           <h3 className="font-madimi text-4xl">Galeria</h3>
-          <div className="sm:grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 auto-rows-[240px] gap-4 my-10 overflow-x-scroll sm:overflow-visible flex flex-nowrap sm:flex-wrap max-container">
-            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
-              <Image src={demoCat} alt="demoCat"></Image>
-            </div>
-            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
-              <Image src={demoCat} alt="demoCat"></Image>
-            </div>
-            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
-              <Image src={demoCat} alt="demoCat"></Image>
-            </div>
-            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
-              <Image src={demoCat} alt="demoCat"></Image>
-            </div>
-            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
-              <Image src={demoCat} alt="demoCat"></Image>
-            </div>
-            <div className="h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%]">
-              <Image src={demoCat} alt="demoCat"></Image>
-            </div>
+          <div className="sm:grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 auto-rows-[300px] gap-4 my-10 overflow-x-scroll sm:overflow-visible flex flex-nowrap sm:flex-wrap max-container">
+            {galleryImages.map(({ photo, id }, index) => {
+              return (
+                <div
+                  key={id}
+                  className={`h-full shadow-card w-full rounded-xl overflow-hidden max-sm:min-w-[90%] max-sm:min-h-full sm:hover:scale-105 duration-500`}
+                >
+                  <Image
+                    src={photo}
+                    width={533}
+                    height={300}
+                    alt="kot"
+                    className="w-full h-full"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -28,12 +28,12 @@ const CatCard: FC<CatCardProps> = async ({ gender, cat, href, bgColor }) => {
         <Image
           alt={cat.name || 'kot'}
           src={catPrimary?.photo || demoCat}
-          className="max-sm:self-center sm:max-w-[220px] object-cover rounded-xl"
-          width={220}
-          height={194}
+          className="max-sm:self-center sm:max-w-[260px] h-full w-full object-cover rounded-xl"
+          width={260}
+          height={147}
         ></Image>
 
-        <div className="flex flex-col h-full w-full sm:px-8">
+        <div className="flex flex-col h-full w-full sm:pl-8">
           <h3 className="text-3xl font-madimi max-sm:mt-2">{cat.name}</h3>
           <p className="line-clamp-3">{cat.description}</p>
           <div className="mt-auto max-sm:w-full max-sm:mt-4">

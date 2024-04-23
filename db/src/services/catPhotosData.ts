@@ -1,6 +1,7 @@
 'use server';
 
 import { CatPhoto, Prisma, PrismaClient } from '@prisma/client';
+import { connect } from 'http2';
 
 interface CreateCatPhotosProps {}
 
@@ -10,7 +11,14 @@ export async function getCatPhotos(catId: number) {
   return prisma.catPhoto.findMany({
     where: {
       catId: catId,
-      catGallery: undefined,
+      catGallery: { none: {} },
+    },
+  });
+}
+export async function getCatGalleryPhotos(catId: number) {
+  return prisma.catPhoto.findMany({
+    where: {
+      catGallery: { some: { catId } },
     },
   });
 }
@@ -24,7 +32,7 @@ export async function createCatPhotos(data: Prisma.CatPhotoCreateInput) {
 }
 
 export const updateCatPrimary = async (catId: number) => {
-  return await prisma.catPhoto.update({
+  return await prisma.catPhoto.updateMany({
     where: { id: catId },
     data: {
       primary: true,

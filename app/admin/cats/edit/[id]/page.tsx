@@ -23,6 +23,7 @@ import {
   deleteCatPhoto,
   getCatPhotos,
   updateCatPrimary,
+  getCatGalleryPhotos,
 } from '@/db/src/services/catPhotosData';
 interface CatFormValues {
   name: string;
@@ -37,6 +38,7 @@ interface CatFormValues {
 const imageTypes: string[] = ['image/jpeg', 'image/png'];
 const EditCat: FC = () => {
   const [images, setImages] = useState<CatPhoto[]>([]);
+  const [galleryImages, setGalleryImages] = useState<CatPhoto[]>([]);
   const [loading, setLoading] = useState(true);
 
   const [cat, setCat] = useState<Cat | null>(null);
@@ -110,6 +112,29 @@ const EditCat: FC = () => {
     [cat?.id],
   );
 
+  const handleCatGalleryPhotoChange = useCallback(
+    async (file: File) => {
+      try {
+        const fileUrl = await uploadFileUrl(file);
+        if (!cat?.id) return;
+        await createCatPhotos({
+          photo: fileUrl,
+          primary: false,
+          Cat: { connect: { id: cat.id } },
+          catGallery: {
+            create: {
+              Cat: { connect: { id: cat.id } },
+            },
+          },
+        });
+      } catch (error) {
+        console.error('Error reading file:', error);
+      }
+      console.log('File uploaded successfully');
+    },
+    [cat?.id],
+  );
+
   const handleSetCatPrimary = async (idToPrimary: number) => {
     return await updateCatPrimary(idToPrimary);
   };
@@ -121,6 +146,7 @@ const EditCat: FC = () => {
       await deleteFile(urlToDelete);
       await deleteCatPhoto(idToDelete);
       setImages(images.filter(({ id }) => id !== idToDelete));
+      setGalleryImages(galleryImages.filter(({ id }) => id !== idToDelete));
     } catch (error) {
       console.error('Error deleting file:', error);
     }
@@ -129,7 +155,11 @@ const EditCat: FC = () => {
   useEffect(() => {
     const fetchImages = async () => {
       const images = await getCatPhotos(Number(id));
+      const galleryImages = await getCatGalleryPhotos(Number(id));
+      console.log({ galleryImages });
+      console.log({ images });
       setImages(images);
+      setGalleryImages(galleryImages);
       setLoading(false);
     };
 
@@ -252,11 +282,11 @@ const EditCat: FC = () => {
             formats={imageTypes}
           />
         )}
-        <div className="flex mb-4">
+        <div className="flex  mb-4">
           {images.map(({ id, photo }) => (
             <div
               key={id}
-              className="relative w-[25%] mt-4 h-small group m-photo-gap grow"
+              className="relative w-[50%] mt-4 h-small group m-photo-gap grow"
             >
               <Image
                 src={photo}
@@ -284,14 +314,40 @@ const EditCat: FC = () => {
           ))}
         </div>
       </div>
-      <div className="mb-5">
-        <h3 className="my-6 text-[24px]">Dodaj zdjęcia do galerii kota </h3>
 
+      <h3 className="my-6 text-[24px]">Dodaj zdjęcia do galerii kota </h3>
+      {!loading && galleryImages.length < 6 && (
         <DragAndDropFiles
-          onChange={handleCatPhotoChange}
+          onChange={handleCatGalleryPhotoChange}
           formats={imageTypes}
         />
+      )}
+      <div className="flex mb-4 flex-wrap">
+        {galleryImages.map(({ id, photo }) => (
+          <div
+            key={id}
+            className="relative w-[25%] mt-4 h-small group m-photo-gap grow"
+          >
+            <Image
+              src={photo}
+              alt={`Gallery image ${id}`}
+              fill
+              sizes="100%"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black opacity-0 transition-opacity duration-200 group-hover:opacity-50 flex items-center justify-center"></div>
+            <div className="absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 flex items-center justify-center">
+              <div
+                className="bg-white rounded-full p-4 text-xl hover:text-coral-red cursor-pointer"
+                onClick={() => handleCatPhotoDelete(id, photo)}
+              >
+                <DeleteIcon className="w-icon-medium h-icon-medium" />
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
+
       <button
         type="submit"
         className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700"
