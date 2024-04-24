@@ -4,15 +4,6 @@ import catYoung from '@/public/cat-young.png';
 
 export const mainPageMenuCards = [
   {
-    title: 'kocury',
-    description: 'lorem ipsum dolor sit amet, lorem ipsum dolor sit amet',
-    img: catAstro,
-    alt: '',
-    cardContainerClasses: 'bg-light-blue',
-    navContainerClasses: 'border-light-blue',
-    href: '/kocury',
-  },
-  {
     title: 'kotki',
     description: 'lorem ipsum dolor sit amet, lorem ipsum dolor sit amet',
     img: catFemale,
@@ -21,6 +12,16 @@ export const mainPageMenuCards = [
     navContainerClasses: 'border-light-pink',
     href: '/kotki',
   },
+  {
+    title: 'kocury',
+    description: 'lorem ipsum dolor sit amet, lorem ipsum dolor sit amet',
+    img: catAstro,
+    alt: '',
+    cardContainerClasses: 'bg-light-blue',
+    navContainerClasses: 'border-light-blue',
+    href: '/kocury',
+  },
+
   {
     title: 'kocięta',
     description: 'lorem ipsum dolor sit amet lorem ipsum dolor sit amet',
