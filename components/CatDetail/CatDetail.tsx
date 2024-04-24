@@ -32,7 +32,6 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
   const galleryImages = await getCatGalleryPhotos(catInfo.id);
   const lineage = await getCatLinegaeDocument(catInfo.id);
   const pkdElement = await getCatPkdDocument(catInfo.id);
-  console.log(lineage);
 
   return (
     <SectionWrapper>

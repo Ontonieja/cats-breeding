@@ -14,7 +14,6 @@ export default function ContactForm() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      console.log(event);
       const formData = new FormData(event.currentTarget);
       const succes = await sendEmail(formData);
       setIsSuccess(succes);
