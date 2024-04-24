@@ -11,17 +11,22 @@ import {
 } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import { NavDesktopElement, NavMobileElement } from './NavElements';
+import { FC } from 'react';
+
 import { setCurrentScreen } from 'firebase/analytics';
-interface navElementProps {
-  navEl1: string;
+import { INavElements } from '@/types/NavElements';
+
+interface NavElementsProps {
+  NavElements: INavElements[];
 }
-const Nav = ({ navEl1 }: navElementProps) => {
+
+const Nav: FC<NavElementsProps> = ({ NavElements }) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const navHidden = 'top-[-100%]';
   const navVisible =
-    ' w-full fixed top-0 z-50 duration-500 bg-white shadow-card';
+    'w-full fixed top-0 z-50 duration-500 left-0 bg-white shadow-card';
   const handleNav = () => {
     setMenuOpen(!menuOpen);
   };
@@ -59,11 +64,13 @@ const Nav = ({ navEl1 }: navElementProps) => {
           <HamburgerIcon />
         </div>
         <ul className="gap-16 text-xl font-medium hidden md:flex max-lg:gap-6">
-          <NavDesktopElement title={navEl1} href="/" />
-          <NavDesktopElement title="Kotki" href="/kotki" />
-          <NavDesktopElement title="Kocury" href="/kocury" />
-          <NavDesktopElement title="Kocięta" href="/kocieta" />
-          <NavDesktopElement title="Kontakt" href="/kontakt" />
+          {NavElements.map((element) => (
+            <NavDesktopElement
+              key={element.title}
+              title={element.title}
+              href={element.href}
+            />
+          ))}
         </ul>
         <div
           className={
@@ -79,32 +86,14 @@ const Nav = ({ navEl1 }: navElementProps) => {
           </div>
           <div className="flex-col py-4 ">
             <ul>
-              <NavMobileElement
-                title="Strona główna"
-                href={'/'}
-                onClick={handleNav}
-              />
-              <NavMobileElement
-                title="Kotki"
-                href={'/kotki'}
-                onClick={handleNav}
-              />
-              <NavMobileElement
-                title="Kocury"
-                href={'/kocury'}
-                onClick={handleNav}
-              />
-
-              <NavMobileElement
-                title="Kocięta"
-                href={'/kocieta'}
-                onClick={handleNav}
-              />
-              <NavMobileElement
-                title="Kontakt"
-                href={'/kontakt'}
-                onClick={handleNav}
-              />
+              {NavElements.map((element) => (
+                <NavMobileElement
+                  key={element.title}
+                  title={element.title}
+                  href={element.href}
+                  onClick={handleNav}
+                />
+              ))}
             </ul>
           </div>
           <div className="flex gap-8 pt-8 items-center">
