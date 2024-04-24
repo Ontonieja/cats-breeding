@@ -22,7 +22,28 @@ export async function getCatGalleryPhotos(catId: number) {
     },
   });
 }
+export async function getCatLinegaeDocument(catId: number) {
+  return prisma.catDocument.findFirst({
+    where: {
+      catId: catId,
+      lineage: { not: null },
+    },
+  });
+}
 
+export async function getCatPkdDocument(catId: number) {
+  return prisma.catDocument.findFirst({
+    where: {
+      catId: catId,
+      pkd: { not: null },
+    },
+  });
+}
+export async function deleteCatDocument(id: number | undefined) {
+  return prisma.catDocument.delete({
+    where: { id },
+  });
+}
 export async function deleteCatPhoto(id: number): Promise<CatPhoto> {
   return prisma.catPhoto.delete({ where: { id } });
 }
@@ -30,6 +51,15 @@ export async function deleteCatPhoto(id: number): Promise<CatPhoto> {
 export async function createCatPhotos(data: Prisma.CatPhotoCreateInput) {
   return prisma.catPhoto.create({ data });
 }
+export async function createCatDocument(data: Prisma.CatDocumentCreateInput) {
+  return prisma.catDocument.create({ data });
+}
+// export async function updateCatDocument(data) {
+//   return prisma.catDocument.update({
+//     where:
+//   })
+//   );
+// }
 
 export const updateCatPrimary = async (catId: number) => {
   return await prisma.catPhoto.updateMany({

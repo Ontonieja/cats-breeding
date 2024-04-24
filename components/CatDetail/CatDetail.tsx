@@ -5,7 +5,12 @@ import SectionWrapper from '@/components/Wrappers/SectionWrappers';
 import { Cat, CatPhoto } from '@prisma/client';
 import Button from '../Base/Button/Button';
 import { db } from '@/db';
-import { getCatGalleryPhotos } from '@/db/src/services/catPhotosData';
+import {
+  getCatGalleryPhotos,
+  getCatLinegaeDocument,
+  getCatPkdDocument,
+} from '@/db/src/services/catPhotosData';
+import Link from 'next/link';
 
 interface CatDetailProps {
   catInfo: Cat;
@@ -25,6 +30,9 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
     },
   });
   const galleryImages = await getCatGalleryPhotos(catInfo.id);
+  const lineage = await getCatLinegaeDocument(catInfo.id);
+  const pkdElement = await getCatPkdDocument(catInfo.id);
+  console.log(lineage);
 
   return (
     <SectionWrapper>
@@ -51,8 +59,8 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
           <div className="w-full md:w-4/5 lg:1/5">
             <Image
               src={catSecondaryPhoto?.photo || demoCat}
-              width={820}
-              height={490}
+              width={681}
+              height={383}
               alt="kot"
               className="rounded-xl shadow-card"
             />
@@ -81,12 +89,16 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
                 <b>Kolor: </b> {catInfo?.color}
               </p>
               <div className="flex gap-4 mt-4 ">
-                <Button type="button" buttonStyle="whiteBlue">
-                  Rodowód
-                </Button>
-                <Button type="button" buttonStyle="whiteBlue">
-                  PKD
-                </Button>
+                <Link href={lineage?.lineage || ''}>
+                  <Button type="button" buttonStyle="whiteBlue">
+                    Rodowód
+                  </Button>
+                </Link>
+                <Link href={pkdElement?.pkd || ''}>
+                  <Button type="button" buttonStyle="whiteBlue">
+                    Rodowód
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

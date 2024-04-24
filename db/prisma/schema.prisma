@@ -51,10 +51,11 @@ model CatGallery {
 }
 
 model CatDocument {
-  id       Int    @id @default(autoincrement())
-  catId    Int
-  Cat      Cat    @relation(fields: [catId], references: [id])
-  document String
+  id      Int     @id @default(autoincrement())
+  catId   Int
+  Cat     Cat     @relation(fields: [catId], references: [id])
+  lineage String?
+  pkd     String?
 }
 
 enum Gender {

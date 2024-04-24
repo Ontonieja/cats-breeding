@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "CatDocument" ALTER COLUMN "lineage" DROP NOT NULL,
+ALTER COLUMN "pkd" DROP NOT NULL;
