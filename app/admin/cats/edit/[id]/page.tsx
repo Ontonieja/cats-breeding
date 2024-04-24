@@ -1,7 +1,7 @@
 'use client';
 import { FC, useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { Cat, CatPhoto } from '@prisma/client';
+import { Cat, CatDocument, CatPhoto } from '@prisma/client';
 import { catSex, catSexOptions } from '@/constants/catSex';
 import { DeleteIcon } from '@/components/Icons/Icons';
 import { getCat, updateCat } from '@/db/src/services/catsData';
@@ -11,20 +11,22 @@ import DragAndDropFiles from '@/utils/DragAndDropFiles';
 import { useCallback } from 'react';
 import uploadFileUrl from '@/helpers/uploadFileUrl';
 import Image from 'next/image';
-import {
-  createGalleryImage,
-  deleteGalleryImage,
-  getGalleryImages,
-} from '@/db/src/services/galleryData';
+import Link from 'next/link';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 import { deleteFile } from '@/services/firebase/storage';
-import { CatGallery } from '@prisma/client';
 import {
   createCatPhotos,
   deleteCatPhoto,
   getCatPhotos,
   updateCatPrimary,
   getCatGalleryPhotos,
+  createCatDocument,
+  getCatLinegaeDocument,
+  getCatPkdDocument,
+  deleteCatDocument,
 } from '@/db/src/services/catPhotosData';
+import Button from '@/components/Base/Button/Button';
 interface CatFormValues {
   name: string;
   genderGroup: string;
@@ -36,11 +38,13 @@ interface CatFormValues {
   Mother: string;
 }
 const imageTypes: string[] = ['image/jpeg', 'image/png'];
+const documentTypes: string[] = ['image/jpeg', 'image/png', 'application/pdf'];
 const EditCat: FC = () => {
   const [images, setImages] = useState<CatPhoto[]>([]);
   const [galleryImages, setGalleryImages] = useState<CatPhoto[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const [lineage, setlineage] = useState<CatDocument>();
+  const [pkd, setPkd] = useState<CatDocument>();
   const [cat, setCat] = useState<Cat | null>(null);
   const [formValues, setFormValues] = useState<CatFormValues>({
     name: '',
@@ -107,7 +111,7 @@ const EditCat: FC = () => {
       } catch (error) {
         console.error('Error reading file:', error);
       }
-      console.log('File uploaded successfully');
+      Notify.success('Dodano pomyślnie, aby zobaczyć odśwież strone');
     },
     [cat?.id],
   );
@@ -130,7 +134,7 @@ const EditCat: FC = () => {
       } catch (error) {
         console.error('Error reading file:', error);
       }
-      console.log('File uploaded successfully');
+      Notify.success('Dodano pomyślnie, aby zobaczyć odśwież strone');
     },
     [cat?.id],
   );
@@ -150,22 +154,66 @@ const EditCat: FC = () => {
     } catch (error) {
       console.error('Error deleting file:', error);
     }
+    Notify.success('Usunięto pomyślnie');
+  };
+
+  const handleLineagePhotoChange = useCallback(
+    async (file: File) => {
+      try {
+        const fileUrl = await uploadFileUrl(file);
+        if (!cat?.id) return;
+        await createCatDocument({
+          Cat: { connect: { id: cat.id } },
+          lineage: fileUrl,
+        });
+      } catch (error) {
+        console.error('Error reading file:', error);
+      }
+      Notify.success('Dodano pomyślnie, aby zobaczyć odśwież strone');
+    },
+    [cat?.id],
+  );
+
+  const handlePkdPhotoChange = useCallback(
+    async (file: File) => {
+      try {
+        const fileUrl = await uploadFileUrl(file);
+        if (!cat?.id) return;
+        await createCatDocument({
+          Cat: { connect: { id: cat.id } },
+          pkd: fileUrl,
+        });
+      } catch (error) {
+        console.error('Error reading file:', error);
+      }
+
+      Notify.success('Dodano pomyślnie, aby zobaczyć odśwież strone');
+    },
+    [cat?.id],
+  );
+  const handleDocumentDelete = async (idToDelete: number | undefined) => {
+    await deleteCatDocument(idToDelete);
+    Notify.success('Usunięto pomyślnie, aby zobaczyć odśwież strone');
   };
 
   useEffect(() => {
     const fetchImages = async () => {
       const images = await getCatPhotos(Number(id));
       const galleryImages = await getCatGalleryPhotos(Number(id));
-      console.log({ galleryImages });
-      console.log({ images });
+      const lineage = await getCatLinegaeDocument(Number(id));
+      const pkd = await getCatPkdDocument(Number(id));
+      if (lineage !== null) {
+        setlineage(lineage);
+      }
+      if (pkd !== null) {
+        setPkd(pkd);
+      }
       setImages(images);
       setGalleryImages(galleryImages);
       setLoading(false);
     };
 
     fetchImages();
-
-    console.log('fetchuje zdjęcia');
   }, [id]);
 
   const handleSubmit = async (event: FormEvent) => {
@@ -347,7 +395,46 @@ const EditCat: FC = () => {
           </div>
         ))}
       </div>
+      <div className="flex flex-col">
+        <h3 className="my-6 text-[24px]">Dodaj rodowów </h3>
+        {!loading && !lineage && (
+          <DragAndDropFiles
+            onChange={handleLineagePhotoChange}
+            formats={documentTypes}
+          />
+        )}
 
+        <Link href={lineage?.lineage || ''}>{lineage?.lineage}</Link>
+        {!loading && lineage && (
+          <Button
+            buttonStyle="delete"
+            onClick={() => handleDocumentDelete(lineage?.id)}
+            className="mt-4"
+          >
+            Usuń rodowód
+          </Button>
+        )}
+      </div>
+      <div className="flex flex-col mb-8">
+        <h3 className="my-6 text-[24px]">Dodaj PKD </h3>
+        {!loading && !pkd && (
+          <DragAndDropFiles
+            onChange={handlePkdPhotoChange}
+            formats={documentTypes}
+          />
+        )}
+
+        <Link href={pkd?.pkd || ''}>{pkd?.pkd}</Link>
+        {!loading && pkd && (
+          <Button
+            buttonStyle="delete"
+            onClick={() => handleDocumentDelete(pkd?.id)}
+            className="mt-4"
+          >
+            Usuń PKD
+          </Button>
+        )}
+      </div>
       <button
         type="submit"
         className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700"
