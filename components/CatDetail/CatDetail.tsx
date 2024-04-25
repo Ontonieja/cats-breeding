@@ -95,7 +95,7 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
                 </Link>
                 <Link href={pkdElement?.pkd || ''}>
                   <Button type="button" buttonStyle="whiteBlue">
-                    Rodowód
+                    PKD
                   </Button>
                 </Link>
               </div>
