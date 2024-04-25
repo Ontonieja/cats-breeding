@@ -7,7 +7,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <div className="container p-10 m-auto">
       <div className="padding-b ">
-        <Nav NavElements={NavAdminPageElements} />
+        <Nav navElements={NavAdminPageElements} />
       </div>
       <AuthProvider>{children}</AuthProvider>
     </div>
