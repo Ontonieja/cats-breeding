@@ -8,13 +8,9 @@ import GoogleProvider from 'next-auth/providers/google';
 
 const { NEXTAUTH_SECRET, WHITELISTED_EMAILS } = process.env;
 
-const emailWhitelist = WHITELISTED_EMAILS
-  ? WHITELISTED_EMAILS.split(',')
-  : [
-      'smagokpnd@gmail.com',
-      'ontonieja@gmail.com',
-      'aleksandraKurek55@gmail.com',
-    ];
+const emailWhitelist = WHITELISTED_EMAILS?.split(',') || [];
+
+if (!emailWhitelist.length) throw new Error('Cannot  find any valid emails');
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -27,7 +23,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        if (!emailWhitelist.includes(user.email || '')) {
+        if (!emailWhitelist.includes(user?.email?.trim() || '')) {
           throw new Error('Invalid email');
         }
       }
