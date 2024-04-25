@@ -36,7 +36,7 @@ model Cat {
 model CatPhoto {
   id         Int          @id @default(autoincrement())
   catId      Int
-  Cat        Cat          @relation(fields: [catId], references: [id])
+  Cat        Cat          @relation(fields: [catId], references: [id], onDelete: Cascade)
   photo      String
   primary    Boolean?
   catGallery CatGallery[]
@@ -46,14 +46,14 @@ model CatGallery {
   id       Int      @id @default(autoincrement())
   catId    Int
   photoId  Int      @unique
-  Cat      Cat      @relation(fields: [catId], references: [id])
+  Cat      Cat      @relation(fields: [catId], references: [id], onDelete: Cascade)
   CatPhoto CatPhoto @relation(fields: [photoId], references: [id], onDelete: Cascade)
 }
 
 model CatDocument {
   id      Int     @id @default(autoincrement())
   catId   Int
-  Cat     Cat     @relation(fields: [catId], references: [id])
+  Cat     Cat     @relation(fields: [catId], references: [id], onDelete: Cascade)
   lineage String?
   pkd     String?
 }

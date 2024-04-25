@@ -8,8 +8,13 @@ import GoogleProvider from 'next-auth/providers/google';
 
 const { NEXTAUTH_SECRET, WHITELISTED_EMAILS } = process.env;
 
-const emailWhitelist = WHITELISTED_EMAILS ? WHITELISTED_EMAILS.split(',') : [];
-console.log(emailWhitelist);
+const emailWhitelist = WHITELISTED_EMAILS
+  ? WHITELISTED_EMAILS.split(',')
+  : [
+      'smagokpnd@gmail.com',
+      'ontonieja@gmail.com',
+      'aleksandraKurek55@gmail.com',
+    ];
 
 export const authOptions: NextAuthOptions = {
   providers: [
