@@ -6,12 +6,9 @@ import { NavUserPageElements } from '@/constants/NavElements';
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
-      <Nav NavElements={NavUserPageElements} />
+      <Nav navElements={NavUserPageElements} />
       <main className="flex flex-col min-h-screen">{children}</main>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

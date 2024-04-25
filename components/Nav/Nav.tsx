@@ -1,7 +1,5 @@
 'use client';
-
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { PawLogo } from '../Icons/Icons';
 import { HamburgerIcon } from '../Icons/Icons';
 import {
@@ -13,14 +11,13 @@ import { useState, useEffect } from 'react';
 import { NavDesktopElement, NavMobileElement } from './NavElements';
 import { FC } from 'react';
 
-import { setCurrentScreen } from 'firebase/analytics';
 import { INavElements } from '@/types/NavElements';
 
 interface NavElementsProps {
-  NavElements: INavElements[];
+  navElements: INavElements[];
 }
 
-const Nav: FC<NavElementsProps> = ({ NavElements }) => {
+const Nav: FC<NavElementsProps> = ({ navElements }) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -64,7 +61,7 @@ const Nav: FC<NavElementsProps> = ({ NavElements }) => {
           <HamburgerIcon />
         </div>
         <ul className="gap-16 text-xl font-medium hidden md:flex max-lg:gap-6">
-          {NavElements.map((element) => (
+          {navElements.map((element) => (
             <NavDesktopElement
               key={element.title}
               title={element.title}
@@ -86,7 +83,7 @@ const Nav: FC<NavElementsProps> = ({ NavElements }) => {
           </div>
           <div className="flex-col py-4 ">
             <ul>
-              {NavElements.map((element) => (
+              {navElements.map((element) => (
                 <NavMobileElement
                   key={element.title}
                   title={element.title}
