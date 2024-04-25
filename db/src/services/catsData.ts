@@ -43,6 +43,9 @@ export async function updateCat(
 
 export async function deleteCat(id: number): Promise<Cat> {
   revalidatePath('/admin/admin/cats/1');
+  revalidatePath('/kocury');
+  revalidatePath('/kocieta');
+  revalidatePath('/kotki');
   return prisma.cat.delete({ where: { id } });
 }
 
