@@ -198,6 +198,7 @@ const EditCat: FC = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
+      console.log('fetchuje');
       const images = await getCatPhotos(Number(id));
       const galleryImages = await getCatGalleryPhotos(Number(id));
       const lineage = await getCatLinegaeDocument(Number(id));
