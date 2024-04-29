@@ -12,7 +12,9 @@ interface PaginationOptions {
 export async function createCat(data: Prisma.CatCreateInput): Promise<Cat> {
   const newCat = prisma.cat.create({ data });
 
-  revalidatePath('/', 'layout');
+  revalidatePath('/kotki');
+  revalidatePath('/kocury');
+  revalidatePath('/kocieta');
   return newCat;
 }
 
@@ -39,7 +41,9 @@ export async function updateCat(
     where: { id },
     data,
   });
-  revalidatePath('/', 'layout');
+  revalidatePath('/kotki');
+  revalidatePath('/kocury');
+  revalidatePath('/kocieta');
 
   return updatedCat;
 }
@@ -48,7 +52,9 @@ export async function deleteCat(id: number): Promise<Cat> {
   const deletedCat = prisma.cat.delete({ where: { id } });
 
   revalidatePath('/admin/admin/cats/1');
-  revalidatePath('/', 'layout');
+  revalidatePath('/kotki');
+  revalidatePath('/kocury');
+  revalidatePath('/kocieta');
 
   return deletedCat;
 }
