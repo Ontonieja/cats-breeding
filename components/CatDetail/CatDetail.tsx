@@ -38,7 +38,7 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
       <section className="max-container">
         <div className="flex gap-12 max-md:flex-col ">
           <div className="w-4/5 max-md:w-full flex-col mt-2">
-            <h1 className="text-4xl font-madimi max-sm:mt-2">
+            <h1 className="text-4xl font-madimi max-sm:mt-2 mb-2">
               {catInfo?.name}
             </h1>
             <p>{catInfo?.description}</p>
