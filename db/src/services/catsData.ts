@@ -10,8 +10,10 @@ interface PaginationOptions {
 }
 
 export async function createCat(data: Prisma.CatCreateInput): Promise<Cat> {
-  revalidatePath('/kocury');
-  return prisma.cat.create({ data });
+  const newCat = prisma.cat.create({ data });
+
+  revalidatePath('/', 'layout');
+  return newCat;
 }
 
 export async function getCats(options?: PaginationOptions): Promise<Cat[]> {
@@ -33,20 +35,22 @@ export async function updateCat(
   id: number,
   data: Prisma.CatUpdateInput,
 ): Promise<Cat> {
-  revalidatePath('/kocury');
-
-  return prisma.cat.update({
+  const updatedCat = prisma.cat.update({
     where: { id },
     data,
   });
+  revalidatePath('/', 'layout');
+
+  return updatedCat;
 }
 
 export async function deleteCat(id: number): Promise<Cat> {
+  const deletedCat = prisma.cat.delete({ where: { id } });
+
   revalidatePath('/admin/admin/cats/1');
-  revalidatePath('/kocury');
-  revalidatePath('/kocieta');
-  revalidatePath('/kotki');
-  return prisma.cat.delete({ where: { id } });
+  revalidatePath('/', 'layout');
+
+  return deletedCat;
 }
 
 export async function findMaleCats() {
