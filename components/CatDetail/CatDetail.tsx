@@ -36,30 +36,30 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
   return (
     <SectionWrapper>
       <section className="max-container">
-        <div className="flex gap-12 max-md:flex-col ">
-          <div className="w-4/5 max-md:w-full flex-col mt-2">
+        <div className="flex gap-12 max-lg:flex-col ">
+          <div className=" lg:w-4/5 max-lg:w-full flex-col mt-2">
             <h1 className="text-4xl font-madimi max-sm:mt-2 mb-2">
               {catInfo?.name}
             </h1>
             <p>{catInfo?.description}</p>
           </div>
-          <div className="w-full md:w-4/5 lg:1/5">
+          <div className="w-full lg:2/5">
             <Image
               src={catPrimaryPhoto?.photo || demoCat}
-              width={681}
-              height={383}
+              width={800}
+              height={450}
               alt="kot"
               className="rounded-xl shadow-card"
             />
           </div>
         </div>
 
-        <div className="flex gap-12 padding-y max-md:flex-col-reverse">
-          <div className="w-full md:w-4/5 lg:1/5">
+        <div className="flex gap-12 padding-y max-lg:flex-col-reverse">
+          <div className="w-full lg:2/5">
             <Image
               src={catSecondaryPhoto?.photo || demoCat}
-              width={681}
-              height={383}
+              width={800}
+              height={450}
               alt="kot"
               className="rounded-xl shadow-card"
             />
@@ -72,7 +72,13 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
               </p>
               <p>
                 <b>Płeć: </b>
-                {catInfo?.genderGroup === 'MALE' ? 'Kocur' : 'Kotka'}
+                {catInfo.gender === 'Kocur' ? 'Kocur' : 'Kotka'}
+              </p>
+              <p>
+                <b>Kolor: </b> {catInfo?.color}
+              </p>
+              <p>
+                <b>Grupa krwi: </b> {catInfo?.blood}
               </p>
               <p>
                 <b>Matka: </b> {catInfo?.Mother}
@@ -80,13 +86,19 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
               <p>
                 <b>Ojciec: </b> {catInfo?.father}
               </p>
-
-              <p>
-                <b>Grupa krwi: </b> {catInfo?.blood}
+              <p className="mt-3">
+                <b>Felv i FIV: </b> {catInfo?.felv}
               </p>
               <p>
-                <b>Kolor: </b> {catInfo?.color}
+                <b>PKD: </b> {catInfo?.pkd}
               </p>
+              {catInfo?.hcm !== '' ? (
+                <p>
+                  <b>HCM: </b> {catInfo?.hcm}
+                </p>
+              ) : (
+                ''
+              )}
               <div className="flex gap-4 mt-4 ">
                 <Link href={lineage?.lineage || ''}>
                   <Button type="button" buttonStyle="whiteBlue">
