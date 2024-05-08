@@ -27,7 +27,11 @@ model Cat {
   blood       String?
   father      String?
   Mother      String?
+  felv        String?
+  pkd         String?
+  hcm         String?
   genderGroup Gender?
+  gender      String?
   photos      CatPhoto[]
   documents   CatDocument[]
   gallery     CatGallery[]
