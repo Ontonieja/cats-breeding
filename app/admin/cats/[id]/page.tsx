@@ -3,6 +3,8 @@ import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { Cat } from '@prisma/client';
+import { createSlug } from '@/db/src/helpers/createSlug';
+
 import {
   createCat,
   getCats,
@@ -55,6 +57,7 @@ const Admin: FC = () => {
       name: '',
       genderGroup: 'MALE',
       description: '',
+      slug: createSlug(''),
     });
     router.push(`/admin/cats/edit/${id}`);
   };

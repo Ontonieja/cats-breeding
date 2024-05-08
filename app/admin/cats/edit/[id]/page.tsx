@@ -6,7 +6,6 @@ import { catSex, catSexOptions } from '@/constants/catSex';
 import { DeleteIcon } from '@/components/Icons/Icons';
 import { getCat, updateCat } from '@/db/src/services/catsData';
 import { SelectField } from '@/components/Base/Select/Select';
-import { createSlug } from '@/db/src/helpers/createSlug';
 import DragAndDropFiles from '@/utils/DragAndDropFiles';
 import { useCallback } from 'react';
 import uploadFileUrl from '@/helpers/uploadFileUrl';
@@ -36,6 +35,10 @@ interface CatFormValues {
   blood: string;
   father: string;
   Mother: string;
+  gender: string;
+  felv: string;
+  pkd: string;
+  hcm: string;
 }
 const imageTypes: string[] = ['image/jpeg', 'image/png'];
 const documentTypes: string[] = ['image/jpeg', 'image/png', 'application/pdf'];
@@ -49,12 +52,16 @@ const EditCat: FC = () => {
   const [formValues, setFormValues] = useState<CatFormValues>({
     name: '',
     genderGroup: 'Kocury',
+    gender: 'Kocur',
     description: '',
     birthday: '',
     color: '',
     blood: '',
     father: '',
     Mother: '',
+    felv: '',
+    hcm: '',
+    pkd: '',
   });
 
   const router = useRouter();
@@ -74,12 +81,16 @@ const EditCat: FC = () => {
         setFormValues({
           name: catInfo?.name || '',
           genderGroup: catInfo?.genderGroup || 'Kocury',
+          gender: catInfo?.gender || 'Kocur',
           description: catInfo?.description || '',
           birthday: catInfo?.birthday || '',
           color: catInfo?.color || '',
           blood: catInfo?.blood || '',
           father: catInfo?.father || '',
           Mother: catInfo?.Mother || '',
+          felv: catInfo?.felv || '',
+          hcm: catInfo?.hcm || '',
+          pkd: catInfo?.pkd || '',
         });
       }
     };
@@ -222,7 +233,6 @@ const EditCat: FC = () => {
       await updateCat(cat.id, {
         ...formValues,
         genderGroup: catSexOptions[formValues.genderGroup] || 'MALE',
-        slug: createSlug(formValues.name),
       });
       router.push('/admin/cats/1');
     }
@@ -254,6 +264,17 @@ const EditCat: FC = () => {
           onChange={handleChange}
           className="mt-1 p-2 w-full border-2 border-gray-300 rounded"
           title="genderGroup"
+        />
+      </div>
+      <div className="mb-5">
+        <label className="block text-gray-700">Płeć:</label>
+        <SelectField
+          name="gender"
+          value={formValues.gender}
+          options={['Kocur', 'Kotka']}
+          onChange={handleChange}
+          className="mt-1 p-2 w-full border-2 border-gray-300 rounded"
+          title="gender"
         />
       </div>
       <div className="mb-5">
@@ -321,6 +342,39 @@ const EditCat: FC = () => {
           onChange={handleChange}
           className="mt-1 p-2 w-full border-2 border-gray-300 rounded"
         />
+        <div className="mb-5">
+          <label className="block text-gray-700">Felv i Fiv:</label>
+          <input
+            title="felv"
+            type="text"
+            name="felv"
+            value={formValues.felv}
+            onChange={handleChange}
+            className="mt-1 p-2 w-full border-2 border-gray-300 rounded"
+          />
+        </div>
+        <div className="mb-5">
+          <label className="block text-gray-700">PKD</label>
+          <input
+            title="pkd"
+            type="text"
+            name="pkd"
+            value={formValues.pkd}
+            onChange={handleChange}
+            className="mt-1 p-2 w-full border-2 border-gray-300 rounded"
+          />
+        </div>
+        <div className="mb-5">
+          <label className="block text-gray-700">HCM</label>
+          <input
+            title="hcm"
+            type="text"
+            name="hcm"
+            value={formValues.hcm}
+            onChange={handleChange}
+            className="mt-1 p-2 w-full border-2 border-gray-300 rounded"
+          />
+        </div>
       </div>
       <div className="mb-5">
         <h3 className="my-6 text-[24px]">Dodaj 2 główne zdjecia </h3>
