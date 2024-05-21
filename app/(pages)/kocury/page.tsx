@@ -7,7 +7,7 @@ const Kocury = () => {
     <SectionWrapper>
       <Catshero
         title="Kocury"
-        description="Nasze kocury to nie tylko zwierzęta, ale także członkowie naszej rodziny. Każdy z nich ma swoją historię i osobowość. Przedstawiamy Ci kilku z nich:"
+        description="Obecnie posiadamy jednego krótkowłosego złotego kocurka z zielonymi oczkami. Nasze koty są aktywnymi członkami naszej rodziny, przyzwyczajone do pieszczot i kontaktu z człowiekiem."
       ></Catshero>
       <CatsList href="/kocury" bgColor="bg-light-blue" />
     </SectionWrapper>

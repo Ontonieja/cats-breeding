@@ -32,12 +32,16 @@ export default function Kontakt() {
             <div className="flex items-center gap-4">
               <MdOutlineEmail className="size-6 text-coral-red" />
               <h2 className="sm:text-xl font-madimi">
-                samo.szczesciepl@gmail.com
+                <a href="mailto:samoszczescie@wp.pl">
+                  samo.szczesciepl@gmail.com
+                </a>
               </h2>
             </div>
             <div className="flex items-center gap-4">
               <FaPhoneAlt className="size-5 text-coral-red" />
-              <h2 className="sm:text-xl font-madimi">+48 530 984 939</h2>
+              <h2 className="sm:text-xl font-madimi">
+                <a href="tel:+48537902130">+48 537 902 130</a>
+              </h2>
             </div>
           </div>
         </div>

@@ -13,12 +13,19 @@ const Footer = () => {
             Samo <br></br>Szczęście
           </span>
         </div>
-        <div className="text-xl max-sm:text-sm">
-          email: <b>samoszczescie@wp.pl</b> tel: <b>+48 535 534 030</b>
+        <div className="text-xl max-sm:text-sm flex gap-2">
+          email:
+          <b>
+            <a href="mailto:samoszczescie@wp.pl"> samoszczescie@wp.pl </a>
+          </b>
+          tel:{' '}
+          <b>
+            <a href="tel:+48537902130">+48 537 902 130</a>
+          </b>
         </div>
         <div className="text-xl max-sm:text-sm max-sm:hidden">
-          Warszawa <br />
-          30-353 Wielickiego 11
+          01-248 Warszawa <br />
+          ul. Jana Kazimierza 31B
         </div>
         <Image
           src={catsHead}

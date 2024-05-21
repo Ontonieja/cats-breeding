@@ -6,8 +6,8 @@ const Kocury = () => {
   return (
     <SectionWrapper>
       <Catshero
-        title="Kocieta"
-        description="Nasze kocury to nie tylko zwierzęta, ale także członkowie naszej rodziny. Każdy z nich ma swoją historię i osobowość. Przedstawiamy Ci kilku z nich:"
+        title="Kocięta"
+        description="Nasze kociątka to nie tylko zwierzęta, ale także członkowie naszej rodziny. Każdy z nich ma swoją historię i osobowość. Przedstawiamy Ci kilku z nich:"
       ></Catshero>
       <CatsList href="/kocieta" bgColor="bg-light-green" gender="KID" />
     </SectionWrapper>
