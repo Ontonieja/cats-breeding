@@ -18,17 +18,10 @@ const DragAndDropFiles: FC<DragAndDropFilesProps> = ({ formats, onChange }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const memoizedFile = useMemo(() => selectedFile, [selectedFile]);
-
-  useEffect(() => {
-    if (memoizedFile) {
-      onChange(memoizedFile);
-    }
-  }, [memoizedFile, onChange]);
-
   const handleFileSelection = (selectedFile: File) => {
     if (formats.includes(selectedFile.type)) {
       setSelectedFile(selectedFile);
+      onChange(selectedFile);
     }
   };
 

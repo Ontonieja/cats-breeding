@@ -40,14 +40,18 @@ interface CatFormValues {
   pkd: string;
   hcm: string;
 }
+
+type saveInDb = (cat: Cat, fileUrl: string) => Promise<void>;
+type documentType = 'Pkd' | 'Lineage';
+
 const imageTypes: string[] = ['image/jpeg', 'image/png'];
 const documentTypes: string[] = ['image/jpeg', 'image/png', 'application/pdf'];
 const EditCat: FC = () => {
   const [images, setImages] = useState<CatPhoto[]>([]);
   const [galleryImages, setGalleryImages] = useState<CatPhoto[]>([]);
   const [loading, setLoading] = useState(true);
-  const [lineage, setlineage] = useState<CatDocument>();
-  const [pkd, setPkd] = useState<CatDocument>();
+  const [lineage, setLineage] = useState<CatDocument | null>();
+  const [pkd, setPkd] = useState<CatDocument | null>();
   const [cat, setCat] = useState<Cat | null>(null);
   const [formValues, setFormValues] = useState<CatFormValues>({
     name: '',
@@ -109,45 +113,58 @@ const EditCat: FC = () => {
     });
   };
 
-  const handleCatPhotoChange = useCallback(
-    async (file: File) => {
-      try {
-        const fileUrl = await uploadFileUrl(file);
-        if (!cat?.id) return;
-        await createCatPhotos({
-          Cat: { connect: { id: cat.id } },
-          photo: fileUrl,
-          primary: false,
-        });
-      } catch (error) {
-        console.error('Error reading file:', error);
-      }
-      Notify.success('Dodano pomyślnie, aby zobaczyć odśwież strone');
-    },
-    [cat?.id],
-  );
+  const saveMainPhoto = async (cat: Cat, fileUrl: string) => {
+    await createCatPhotos({
+      Cat: { connect: { id: cat.id } },
+      photo: fileUrl,
+      primary: false,
+    });
+  };
 
-  const handleCatGalleryPhotoChange = useCallback(
-    async (file: File) => {
+  const saveGalleryPhoto = async (cat: Cat, fileUrl: string) => {
+    await createCatPhotos({
+      photo: fileUrl,
+      primary: false,
+      Cat: { connect: { id: cat.id } },
+      catGallery: {
+        create: {
+          Cat: { connect: { id: cat.id } },
+        },
+      },
+    });
+  };
+
+  const saveLineageFile = async (cat: Cat, fileUrl: string) => {
+    await createCatDocument({
+      Cat: { connect: { id: cat.id } },
+      lineage: fileUrl,
+    });
+  };
+
+  const savePkdFile = async (cat: Cat, fileUrl: string) => {
+    await createCatDocument({
+      Cat: { connect: { id: cat.id } },
+      pkd: fileUrl,
+    });
+  };
+
+  const handlePhotosUpload = useCallback(
+    async (
+      file: File,
+      saveInDb: saveInDb,
+      setState: React.Dispatch<React.SetStateAction<CatPhoto[]>>,
+    ) => {
       try {
         const fileUrl = await uploadFileUrl(file);
         if (!cat?.id) return;
-        await createCatPhotos({
-          photo: fileUrl,
-          primary: false,
-          Cat: { connect: { id: cat.id } },
-          catGallery: {
-            create: {
-              Cat: { connect: { id: cat.id } },
-            },
-          },
-        });
+        await saveInDb(cat, fileUrl);
+        setState((prevState) => [...prevState, { photo: fileUrl } as CatPhoto]);
+        Notify.success('Dodano pomyślnie');
       } catch (error) {
         console.error('Error reading file:', error);
       }
-      Notify.success('Dodano pomyślnie, aby zobaczyć odśwież strone');
     },
-    [cat?.id],
+    [cat],
   );
 
   const handleSetCatPrimary = async (idToPrimary: number) => {
@@ -158,53 +175,64 @@ const EditCat: FC = () => {
     urlToDelete: string,
   ) => {
     try {
+      if (typeof idToDelete === 'undefined') {
+        Notify.failure(
+          'Najpierw zapisz kotka lub odśwież stronę żeby usunąć zdjęcie ',
+        );
+        return;
+      }
       await deleteFile(urlToDelete);
       await deleteCatPhoto(idToDelete);
       setImages(images.filter(({ id }) => id !== idToDelete));
       setGalleryImages(galleryImages.filter(({ id }) => id !== idToDelete));
+      Notify.success('Usunięto pomyślnie');
     } catch (error) {
       console.error('Error deleting file:', error);
     }
-    Notify.success('Usunięto pomyślnie');
   };
 
-  const handleLineagePhotoChange = useCallback(
-    async (file: File) => {
+  const handleDocumentsUpload = useCallback(
+    async (file: File, saveInDb: saveInDb, documentType: documentType) => {
       try {
         const fileUrl = await uploadFileUrl(file);
         if (!cat?.id) return;
-        await createCatDocument({
-          Cat: { connect: { id: cat.id } },
-          lineage: fileUrl,
-        });
+        await saveInDb(cat, fileUrl);
+        if (typeof cat?.id === 'undefined') {
+          Notify.failure(
+            'Najpierw zapisz kotka lub odśwież stronę żeby usunąć dokument ',
+          );
+          return;
+        }
+        if (documentType === 'Lineage') {
+          setLineage({ lineage: fileUrl } as CatDocument);
+        }
+        if (documentType === 'Pkd') {
+          setPkd({ pkd: fileUrl } as CatDocument);
+        }
+
+        Notify.success('Dodano pomyślnie');
       } catch (error) {
         console.error('Error reading file:', error);
       }
-      Notify.success('Dodano pomyślnie, aby zobaczyć odśwież strone');
     },
-    [cat?.id],
+    [cat],
   );
 
-  const handlePkdPhotoChange = useCallback(
-    async (file: File) => {
-      try {
-        const fileUrl = await uploadFileUrl(file);
-        if (!cat?.id) return;
-        await createCatDocument({
-          Cat: { connect: { id: cat.id } },
-          pkd: fileUrl,
-        });
-      } catch (error) {
-        console.error('Error reading file:', error);
+  const handleDocumentDelete = async (
+    idToDelete: number | undefined,
+    documentType: documentType,
+  ) => {
+    try {
+      await deleteCatDocument(idToDelete);
+      if (documentType === 'Lineage') {
+        setLineage(null);
+      } else if (documentType === 'Pkd') {
+        setPkd(null);
       }
-
-      Notify.success('Dodano pomyślnie, aby zobaczyć odśwież strone');
-    },
-    [cat?.id],
-  );
-  const handleDocumentDelete = async (idToDelete: number | undefined) => {
-    await deleteCatDocument(idToDelete);
-    Notify.success('Usunięto pomyślnie, aby zobaczyć odśwież strone');
+      Notify.success('Usunięto pomyślnie');
+    } catch (e) {
+      console.log;
+    }
   };
 
   useEffect(() => {
@@ -214,7 +242,7 @@ const EditCat: FC = () => {
       const lineage = await getCatLinegaeDocument(Number(id));
       const pkd = await getCatPkdDocument(Number(id));
       if (lineage !== null) {
-        setlineage(lineage);
+        setLineage(lineage);
       }
       if (pkd !== null) {
         setPkd(pkd);
@@ -380,7 +408,9 @@ const EditCat: FC = () => {
         <h3 className="my-6 text-[24px]">Dodaj 2 główne zdjecia </h3>
         {!loading && images.length < 2 && (
           <DragAndDropFiles
-            onChange={handleCatPhotoChange}
+            onChange={(file) =>
+              handlePhotosUpload(file, saveMainPhoto, setImages)
+            }
             formats={imageTypes}
           />
         )}
@@ -420,7 +450,9 @@ const EditCat: FC = () => {
       <h3 className="my-6 text-[24px]">Dodaj zdjęcia do galerii kota </h3>
       {!loading && galleryImages.length < 6 && (
         <DragAndDropFiles
-          onChange={handleCatGalleryPhotoChange}
+          onChange={(file) =>
+            handlePhotosUpload(file, saveGalleryPhoto, setGalleryImages)
+          }
           formats={imageTypes}
         />
       )}
@@ -453,7 +485,9 @@ const EditCat: FC = () => {
         <h3 className="my-6 text-[24px]">Dodaj rodowów </h3>
         {!loading && !lineage && (
           <DragAndDropFiles
-            onChange={handleLineagePhotoChange}
+            onChange={(file) =>
+              handleDocumentsUpload(file, saveLineageFile, 'Lineage')
+            }
             formats={documentTypes}
           />
         )}
@@ -462,7 +496,7 @@ const EditCat: FC = () => {
         {!loading && lineage && (
           <Button
             buttonStyle="delete"
-            onClick={() => handleDocumentDelete(lineage?.id)}
+            onClick={() => handleDocumentDelete(lineage?.id, 'Lineage')}
             className="mt-4"
           >
             Usuń rodowód
@@ -473,7 +507,7 @@ const EditCat: FC = () => {
         <h3 className="my-6 text-[24px]">Dodaj PKD </h3>
         {!loading && !pkd && (
           <DragAndDropFiles
-            onChange={handlePkdPhotoChange}
+            onChange={(file) => handleDocumentsUpload(file, savePkdFile, 'Pkd')}
             formats={documentTypes}
           />
         )}
@@ -482,7 +516,7 @@ const EditCat: FC = () => {
         {!loading && pkd && (
           <Button
             buttonStyle="delete"
-            onClick={() => handleDocumentDelete(pkd?.id)}
+            onClick={() => handleDocumentDelete(pkd?.id, 'Pkd')}
             className="mt-4"
           >
             Usuń PKD

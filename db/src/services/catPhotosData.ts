@@ -48,22 +48,28 @@ export async function deleteCatPhoto(id: number): Promise<CatPhoto> {
   return prisma.catPhoto.delete({ where: { id } });
 }
 
-export async function createCatPhotos(data: Prisma.CatPhotoCreateInput) {
+export async function createCatPhotos(
+  data: Prisma.CatPhotoCreateInput,
+): Promise<CatPhoto> {
   return prisma.catPhoto.create({ data });
 }
 export async function createCatDocument(data: Prisma.CatDocumentCreateInput) {
-  return prisma.catDocument.create({ data });
+  const result = prisma.catDocument.create({ data });
+  return result;
 }
-// export async function updateCatDocument(data) {
-//   return prisma.catDocument.update({
-//     where:
-//   })
-//   );
-// }
 
-export const updateCatPrimary = async (catId: number) => {
-  return await prisma.catPhoto.updateMany({
-    where: { id: catId },
+export const updateCatPrimary = async (photoId: number) => {
+  const photos = await getCatPhotos(photoId);
+
+  await prisma.catPhoto.updateMany({
+    where: { id: { not: photoId } },
+    data: {
+      primary: false,
+    },
+  });
+
+  await prisma.catPhoto.updateMany({
+    where: { id: photoId },
     data: {
       primary: true,
     },
