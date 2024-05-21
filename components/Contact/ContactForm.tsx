@@ -46,11 +46,11 @@ export default function ContactForm() {
       </div>
       <div className="relative">
         <p className="absolute bottom-6 right-3 text-gray-400">
-          {charCount}/250
+          {charCount}/500
         </p>
         <textarea
           name="message"
-          maxLength={250}
+          maxLength={500}
           className="border-2 w-full px-4 my-3 h-44 rounded-3xl p-4 "
           required
           value={message}
