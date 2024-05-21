@@ -37,17 +37,17 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
     <SectionWrapper>
       <section className="max-container">
         <div className="flex gap-12 max-lg:flex-col ">
-          <div className=" lg:w-4/5 max-lg:w-full flex-col mt-2">
+          <div className="  w-full flex-col mt-2">
             <h1 className="text-4xl font-madimi max-sm:mt-2 mb-2">
               {catInfo?.name}
             </h1>
             <p>{catInfo?.description}</p>
           </div>
-          <div className="w-full lg:2/5">
+          <div className="w-full ">
             <Image
               src={catPrimaryPhoto?.photo || demoCat}
-              width={800}
-              height={450}
+              width={680}
+              height={382}
               alt="kot"
               className="rounded-xl shadow-card"
             />
@@ -55,16 +55,16 @@ export default async function CatDetail({ catInfo }: CatDetailProps) {
         </div>
 
         <div className="flex gap-12 padding-y max-lg:flex-col-reverse">
-          <div className="w-full lg:2/5">
+          <div className="w-full">
             <Image
               src={catSecondaryPhoto?.photo || demoCat}
-              width={800}
-              height={450}
+              width={680}
+              height={382}
               alt="kot"
               className="rounded-xl shadow-card"
             />
           </div>
-          <div className="w-4/5 text-xl max-md:w-full">
+          <div className=" text-xl w-full">
             <h2 className="text-4xl font-madimi max-sm:mt-2">Informacje</h2>
             <div className="gap-2 flex flex-col mt-2">
               <p>

@@ -5,7 +5,7 @@ import catYoung from '@/public/cat-young.png';
 export const mainPageMenuCards = [
   {
     title: 'kotki',
-    description: 'lorem ipsum dolor sit amet, lorem ipsum dolor sit amet',
+    description: 'Kliknij w kartę by zobaczyć nasze piękne kotki!',
     img: catFemale,
     alt: '',
     cardContainerClasses: 'bg-light-pink',
@@ -14,7 +14,7 @@ export const mainPageMenuCards = [
   },
   {
     title: 'kocury',
-    description: 'lorem ipsum dolor sit amet, lorem ipsum dolor sit amet',
+    description: 'Kliknij w kartę by zobaczyć nasze czarujące kocury!',
     img: catAstro,
     alt: '',
     cardContainerClasses: 'bg-light-blue',
@@ -24,7 +24,7 @@ export const mainPageMenuCards = [
 
   {
     title: 'kocięta',
-    description: 'lorem ipsum dolor sit amet lorem ipsum dolor sit amet',
+    description: 'Kliknij w kartę by zobaczyć nasze urocze kocięta!',
     img: catYoung,
     alt: '',
     cardContainerClasses: 'bg-light-green',
