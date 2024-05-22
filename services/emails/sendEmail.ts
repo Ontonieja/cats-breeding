@@ -9,8 +9,8 @@ export const sendEmail = async (formData: FormData) => {
 
   try {
     await resend.emails.send({
-      from: 'Samo Szczescie <onboarding@resend.dev>',
-      to: ['ontonieja@gmail.com'],
+      from: 'donotreply@samoszczescie.pl',
+      to: ['samo.szczesciepl@gmail.com'],
       subject: 'Nowa wiadomośc ze strony Samo Szczęście!',
       text: message,
       reply_to: senderEmail,
