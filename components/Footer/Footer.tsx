@@ -16,7 +16,10 @@ const Footer = () => {
         <div className="text-xl max-sm:text-sm flex gap-2">
           email:
           <b>
-            <a href="mailto:samoszczescie@wp.pl"> samoszczescie@wp.pl </a>
+            <a href="mailto:samo.szczesciepl@gmail.com">
+              {' '}
+              samo.szczesciepl@gmail.com{' '}
+            </a>
           </b>
           tel:{' '}
           <b>
