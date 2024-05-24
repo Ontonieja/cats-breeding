@@ -167,8 +167,8 @@ const EditCat: FC = () => {
     [cat],
   );
 
-  const handleSetCatPrimary = async (idToPrimary: number) => {
-    return await updateCatPrimary(idToPrimary);
+  const handleSetCatPrimary = async (id: number, catId: number) => {
+    return await updateCatPrimary(id, catId);
   };
   const handleCatPhotoDelete = async (
     idToDelete: number,
@@ -415,7 +415,7 @@ const EditCat: FC = () => {
           />
         )}
         <div className="flex  mb-4">
-          {images.map(({ id, photo }) => (
+          {images.map(({ id, photo, catId }) => (
             <div
               key={id}
               className="relative w-[50%] mt-4 h-small group m-photo-gap grow"
@@ -437,7 +437,7 @@ const EditCat: FC = () => {
                 </div>
                 <div
                   className="bg-white rounded-full p-4 text-xl hover:text-coral-red cursor-pointer"
-                  onClick={() => handleSetCatPrimary(id)}
+                  onClick={() => handleSetCatPrimary(id, catId)}
                 >
                   <div>Ustaw główne</div>
                 </div>

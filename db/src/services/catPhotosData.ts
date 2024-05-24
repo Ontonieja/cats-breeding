@@ -58,18 +58,16 @@ export async function createCatDocument(data: Prisma.CatDocumentCreateInput) {
   return result;
 }
 
-export const updateCatPrimary = async (photoId: number) => {
-  const photos = await getCatPhotos(photoId);
-
+export const updateCatPrimary = async (id: number, catId: number) => {
   await prisma.catPhoto.updateMany({
-    where: { id: { not: photoId } },
+    where: { catId },
     data: {
       primary: false,
     },
   });
 
   await prisma.catPhoto.updateMany({
-    where: { id: photoId },
+    where: { id },
     data: {
       primary: true,
     },
