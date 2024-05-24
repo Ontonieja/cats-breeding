@@ -1,9 +1,7 @@
 'use server';
 
 import { CatPhoto, Prisma, PrismaClient } from '@prisma/client';
-import { connect } from 'http2';
-
-interface CreateCatPhotosProps {}
+import { revalidatePaths } from '@/helpers/revalidatePaths';
 
 const prisma = new PrismaClient();
 
@@ -72,4 +70,6 @@ export const updateCatPrimary = async (id: number, catId: number) => {
       primary: true,
     },
   });
+
+  await revalidatePaths(['/kotki', '/kocury', '/kocieta']);
 };
